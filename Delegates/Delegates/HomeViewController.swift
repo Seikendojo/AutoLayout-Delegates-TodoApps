@@ -18,11 +18,16 @@ class HomeViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "presentInput" {
             let destinationVC = segue.destination as? InputViewContrller
-            destinationVC?.onSaveTap = updateGreeting
+            destinationVC?.delegate = self
         }
     }
 
-    private func updateGreeting(name: String) {
-        greetingLabel.text = "Good Morning\n\(name)"
+   
+}
+
+extension HomeViewController: InputDelegate {
+    func delegateAction(name: String, greeting: String, backGround color: UIColor) {
+        greetingLabel.text = greeting
+        view.backgroundColor = color
     }
 }
