@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol InputDelegate {
-    func delegateAction(name: String, greeting: String, backGround color: UIColor)
+protocol InputFormDelegate: AnyObject {
+    func updateName(_ name: String)
 }
 
 class InputViewContrller: UIViewController {
     
-    var delegate : InputDelegate!
+    weak var delegate: InputFormDelegate?
     
     @IBOutlet weak var nameTextfield: UITextField!
     @IBOutlet weak var saveButton: UIButton!
@@ -21,10 +21,8 @@ class InputViewContrller: UIViewController {
    
 
     @IBAction func onSaveTap(_ sender: UIButton) {
-        let name = nameTextfield.text
-        let greeting = "Good Morning \(name!)!"
-        
-        delegate.delegateAction(name: name!, greeting: greeting, backGround: .cyan)
+        guard let name = nameTextfield.text, !name.isEmpty else { return }
+        delegate?.updateName(name)
         dismiss(animated: true)
     }
 }
