@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EB9CB95A27462CC900B551B2"
-               BuildableName = "AutoLayout.app"
-               BlueprintName = "AutoLayout"
-               ReferencedContainer = "container:AutoLayout.xcodeproj">
+               BlueprintIdentifier = "EBB18C6A276BB6FE00483345"
+               BuildableName = "ToDos.app"
+               BlueprintName = "ToDos"
+               ReferencedContainer = "container:ToDos.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -44,10 +44,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EB9CB95A27462CC900B551B2"
-            BuildableName = "AutoLayout.app"
-            BlueprintName = "AutoLayout"
-            ReferencedContainer = "container:AutoLayout.xcodeproj">
+            BlueprintIdentifier = "EBB18C6A276BB6FE00483345"
+            BuildableName = "ToDos.app"
+            BlueprintName = "ToDos"
+            ReferencedContainer = "container:ToDos.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -61,10 +61,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EB9CB95A27462CC900B551B2"
-            BuildableName = "AutoLayout.app"
-            BlueprintName = "AutoLayout"
-            ReferencedContainer = "container:AutoLayout.xcodeproj">
+            BlueprintIdentifier = "EBB18C6A276BB6FE00483345"
+            BuildableName = "ToDos.app"
+            BlueprintName = "ToDos"
+            ReferencedContainer = "container:ToDos.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
