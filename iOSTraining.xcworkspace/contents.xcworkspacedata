@@ -7,4 +7,7 @@
    <FileRef
       location = "group:Delegates/Delegates.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:ToDos/ToDos.xcodeproj">
+   </FileRef>
 </Workspace>
