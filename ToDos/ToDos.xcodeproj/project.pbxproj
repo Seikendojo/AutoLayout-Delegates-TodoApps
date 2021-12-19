@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		13D23F28276EB59100869EBC /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D23F27276EB59100869EBC /* EntryViewController.swift */; };
 		EB7F2028276E8ECC00315C49 /* TodosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F2027276E8ECC00315C49 /* TodosViewController.swift */; };
 		EBB18C6F276BB6FE00483345 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB18C6E276BB6FE00483345 /* AppDelegate.swift */; };
 		EBB18C71276BB6FE00483345 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB18C70276BB6FE00483345 /* SceneDelegate.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		13D23F27276EB59100869EBC /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		EB7F2027276E8ECC00315C49 /* TodosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosViewController.swift; sourceTree = "<group>"; };
 		EBB18C6B276BB6FE00483345 /* ToDos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBB18C6E276BB6FE00483345 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				EBB18C6E276BB6FE00483345 /* AppDelegate.swift */,
 				EBB18C70276BB6FE00483345 /* SceneDelegate.swift */,
 				EB7F2027276E8ECC00315C49 /* TodosViewController.swift */,
+				13D23F27276EB59100869EBC /* EntryViewController.swift */,
 				EBB18C74276BB6FE00483345 /* Main.storyboard */,
 				EBB18C77276BB6FF00483345 /* Assets.xcassets */,
 				EBB18C79276BB6FF00483345 /* LaunchScreen.storyboard */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBB18C6F276BB6FE00483345 /* AppDelegate.swift in Sources */,
+				13D23F28276EB59100869EBC /* EntryViewController.swift in Sources */,
 				EB7F2028276E8ECC00315C49 /* TodosViewController.swift in Sources */,
 				EBB18C71276BB6FE00483345 /* SceneDelegate.swift in Sources */,
 			);
