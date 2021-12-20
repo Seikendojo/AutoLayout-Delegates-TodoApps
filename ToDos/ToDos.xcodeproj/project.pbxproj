@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1307E6DB27701026000AA6FD /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1307E6D927701026000AA6FD /* TableViewCell.swift */; };
+		1307E6DC27701026000AA6FD /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1307E6DA27701026000AA6FD /* TableViewCell.xib */; };
 		13D23F28276EB59100869EBC /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D23F27276EB59100869EBC /* EntryViewController.swift */; };
 		EB7F2028276E8ECC00315C49 /* TodosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F2027276E8ECC00315C49 /* TodosViewController.swift */; };
 		EBB18C6F276BB6FE00483345 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB18C6E276BB6FE00483345 /* AppDelegate.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1307E6D927701026000AA6FD /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		1307E6DA27701026000AA6FD /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
 		13D23F27276EB59100869EBC /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
 		EB7F2027276E8ECC00315C49 /* TodosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosViewController.swift; sourceTree = "<group>"; };
 		EBB18C6B276BB6FE00483345 /* ToDos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDos.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +66,8 @@
 				EBB18C70276BB6FE00483345 /* SceneDelegate.swift */,
 				EB7F2027276E8ECC00315C49 /* TodosViewController.swift */,
 				13D23F27276EB59100869EBC /* EntryViewController.swift */,
+				1307E6D927701026000AA6FD /* TableViewCell.swift */,
+				1307E6DA27701026000AA6FD /* TableViewCell.xib */,
 				EBB18C74276BB6FE00483345 /* Main.storyboard */,
 				EBB18C77276BB6FF00483345 /* Assets.xcassets */,
 				EBB18C79276BB6FF00483345 /* LaunchScreen.storyboard */,
@@ -129,6 +135,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBB18C7B276BB6FF00483345 /* LaunchScreen.storyboard in Resources */,
+				1307E6DC27701026000AA6FD /* TableViewCell.xib in Resources */,
 				EBB18C78276BB6FF00483345 /* Assets.xcassets in Resources */,
 				EBB18C76276BB6FE00483345 /* Main.storyboard in Resources */,
 			);
@@ -141,6 +148,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1307E6DB27701026000AA6FD /* TableViewCell.swift in Sources */,
 				EBB18C6F276BB6FE00483345 /* AppDelegate.swift in Sources */,
 				13D23F28276EB59100869EBC /* EntryViewController.swift in Sources */,
 				EB7F2028276E8ECC00315C49 /* TodosViewController.swift in Sources */,

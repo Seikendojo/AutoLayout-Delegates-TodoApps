@@ -151,7 +151,9 @@
                             <constraint firstItem="ZC1-bM-m1v" firstAttribute="leading" secondItem="5w6-Wk-i8V" secondAttribute="leading" constant="44" id="zaA-fA-mgY"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="jeC-In-K4z"/>
+                    <navigationItem key="navigationItem" id="jeC-In-K4z">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="xEG-4R-cvK"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="dateTextFeild" destination="hLQ-cA-qUl" id="aLV-S3-Ou8"/>
                         <outlet property="priorityControl" destination="GWP-d0-XX6" id="X2W-y9-Iux"/>

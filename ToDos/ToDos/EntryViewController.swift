@@ -16,6 +16,7 @@ class EntryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        whatToDoTextFeild.becomeFirstResponder()
     }
     
     
