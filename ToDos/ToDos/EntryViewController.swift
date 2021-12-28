@@ -20,21 +20,27 @@ class EntryViewController: UIViewController {
     @IBOutlet var whatToDoTextFeild: UITextField!
     @IBOutlet var dateTextFeild: UITextField!
     @IBOutlet var priorityControl: UISegmentedControl!
+    @IBOutlet var saveBarButton: UIBarButtonItem!
     
     let datePicker = UIDatePicker()
+    var dataArray: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         whatToDoTextFeild.becomeFirstResponder()
         configDatePicker()
         saveInputs()
+        save()
+
     }
     
     func configToolbar() -> UIToolbar {
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
         
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done,
+                                         target: nil,
+                                         action: #selector(donePressed))
         toolBar.setItems([doneButton], animated: true)
 
         return toolBar
@@ -60,6 +66,7 @@ class EntryViewController: UIViewController {
         let selectedIndex = priorityControl.isSelected
         if !selectedIndex {
             priorityControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: UIControl.State.selected)
+
             let selectedIndex = priorityControl.selectedSegmentIndex
             switch selectedIndex {
             case 0: print("!")
@@ -70,6 +77,7 @@ class EntryViewController: UIViewController {
             }
         }
     }
+
     
     func saveInputs() {
         let todo = UserDefaults.standard.string(forKey: "todo")
@@ -95,4 +103,39 @@ class EntryViewController: UIViewController {
         print(data.date)
         dismiss(animated: true)
     }
+
+    
+    func save() {
+        let todoValue = UserDefaults.standard.string(forKey: "todoTask")
+        let dateValue = UserDefaults.standard.string(forKey: "date")
+        
+        if let todoValue = todoValue {
+            whatToDoTextFeild.text = todoValue
+        } else { whatToDoTextFeild.text = "Enter new task"}
+        
+        if let dateValue = dateValue {
+            dateTextFeild.text = dateValue
+        } else { dateTextFeild.text =  "Pick a date"}
+    }
+    
+        
+    @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
+        let todoTask = whatToDoTextFeild.text
+        let date = dateTextFeild.text
+        UserDefaults.standard.set(todoTask, forKey: "todoTask")
+        UserDefaults.standard.set(date, forKey: "date")
+        
+        guard let todoTask = whatToDoTextFeild.text, !todoTask.isEmpty else {  return }
+        guard let date = dateTextFeild.text, !date.isEmpty else { return }
+        
+        let data = InputData(todoTask: todoTask, date: date)
+        delegate?.addData(data: data)
+        
+        //Check if you can get the input data
+        print(data.todoTask)
+        print(data.date)
+        dismiss(animated: true)
+        
+    }
+    
 }

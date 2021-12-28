@@ -155,13 +155,14 @@
                     <navigationItem key="navigationItem" id="jeC-In-K4z">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="xEG-4R-cvK">
                             <connections>
-                                <action selector="saveButtonTapped:" destination="QA5-UA-5c8" id="4Qw-zB-pPB"/>
+                                <action selector="saveButtonPressed:" destination="QA5-UA-5c8" id="Tss-Fj-Jf0"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="dateTextFeild" destination="hLQ-cA-qUl" id="aLV-S3-Ou8"/>
                         <outlet property="priorityControl" destination="GWP-d0-XX6" id="X2W-y9-Iux"/>
+                        <outlet property="saveBarButton" destination="xEG-4R-cvK" id="hDB-hA-Rzr"/>
                         <outlet property="whatToDoTextFeild" destination="Ral-Yh-bNM" id="3qX-1y-jtS"/>
                     </connections>
                 </viewController>
