@@ -56,7 +56,8 @@
                     <navigationItem key="navigationItem" title="Todos" id="jJt-3O-Tnc">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="CPd-c6-pXh">
                             <connections>
-                                <segue destination="QA5-UA-5c8" kind="show" id="fv3-ia-7Nx"/>
+                                <action selector="addButtonTapped:" destination="rld-mK-UB4" id="PUl-S6-wgF"/>
+                                <segue destination="QA5-UA-5c8" kind="show" id="kJf-jp-sqn"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -73,7 +74,7 @@
         <!--Entry View Controller-->
         <scene sceneID="OnJ-eJ-fCm">
             <objects>
-                <viewController id="QA5-UA-5c8" customClass="EntryViewController" customModule="ToDos" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EntryViewController" id="QA5-UA-5c8" customClass="EntryViewController" customModule="ToDos" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U2G-xZ-BL0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -152,7 +153,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jeC-In-K4z">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="xEG-4R-cvK"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="xEG-4R-cvK">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="QA5-UA-5c8" id="4Qw-zB-pPB"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="dateTextFeild" destination="hLQ-cA-qUl" id="aLV-S3-Ou8"/>

@@ -7,23 +7,18 @@
 
 import UIKit
 
+struct InputData {
+    var todoTask: String
+    var date: String
+}
+
 class TodosViewController: UITableViewController {
     
+    //Making data array
+    var myData = [InputData]()
+    
     @IBOutlet var nothingTodoLabel: UILabel!
-    
-    let mytodoData = ["Pick up grouceries",
-                      "Buy Xmas Tree",
-                      "Send Xmas gifts"]
-    
-    let priorityData = ["!",
-                        "!!",
-                        "!!!"]
-    
-    let timeData = ["tomorrow",
-                    "Dec 17, 2021",
-                    "Dec 18, 2021"]
-    
-    
+     
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,6 +27,11 @@ class TodosViewController: UITableViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
+        let VC = EntryViewController()
+        VC.delegate = self
     }
 }
 
@@ -42,18 +42,29 @@ extension TodosViewController {
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return mytodoData.count
+        return myData.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
-        cell.todoTextLabel?.text = mytodoData[indexPath.row]
-        cell.priorityLabel.text = priorityData[indexPath.row]
-        cell.timeLabel.text = timeData[indexPath.row]
+        //Occupy cells at indexpath
+        cell.todoTextLabel?.text = myData[indexPath.row].todoTask
+        cell.timeLabel.text = myData[indexPath.row].date
+    
         nothingTodoLabel.isHidden = true
-        
+    
         return cell
+    }
+}
+
+//MARK: Compfort Delegate
+
+extension TodosViewController: AddInputDelegate {
+    func addData(data: InputData) {
+        self.dismiss(animated: true) {
+            self.myData.append(data)
+            self.tableView.reloadData()
+        }
     }
 }

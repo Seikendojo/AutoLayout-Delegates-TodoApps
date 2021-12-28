@@ -7,7 +7,15 @@
 
 import UIKit
 
+protocol AddInputDelegate {
+    func addData(data: InputData)
+}
+
+
 class EntryViewController: UIViewController {
+    
+    //Create delgate object
+    var delegate: AddInputDelegate?
     
     @IBOutlet var whatToDoTextFeild: UITextField!
     @IBOutlet var dateTextFeild: UITextField!
@@ -19,6 +27,7 @@ class EntryViewController: UIViewController {
         super.viewDidLoad()
         whatToDoTextFeild.becomeFirstResponder()
         configDatePicker()
+        saveInputs()
     }
     
     func configToolbar() -> UIToolbar {
@@ -51,6 +60,39 @@ class EntryViewController: UIViewController {
         let selectedIndex = priorityControl.isSelected
         if !selectedIndex {
             priorityControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: UIControl.State.selected)
+            let selectedIndex = priorityControl.selectedSegmentIndex
+            switch selectedIndex {
+            case 0: print("!")
+            case 1: print("!!")
+            case 2: print("!!!")
+            default:
+                break
+            }
         }
+    }
+    
+    func saveInputs() {
+        let todo = UserDefaults.standard.string(forKey: "todo")
+        let date = UserDefaults.standard.string(forKey: "date")
+        whatToDoTextFeild.text = todo
+        dateTextFeild.text = date
+    }
+    
+    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+        let todo = whatToDoTextFeild.text
+        let date = dateTextFeild.text
+        UserDefaults.standard.set(todo, forKey: "todo")
+        UserDefaults.standard.set(date, forKey: "date")
+        
+        guard let todoTask = whatToDoTextFeild.text, !todoTask.isEmpty else {  return }
+        guard let date = dateTextFeild.text, !date.isEmpty else { return }
+        
+        let data = InputData(todoTask: todoTask, date: date)
+        delegate?.addData(data: data)
+        
+        //Check if you can get the input data
+        print(data.todoTask)
+        print(data.date)
+        dismiss(animated: true)
     }
 }
