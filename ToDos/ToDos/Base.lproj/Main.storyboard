@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3Iy-ws-q7O">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3Iy-ws-q7O">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="QQ7-xb-eAl">
-                            <rect key="frame" x="0.0" y="110.5" width="414" height="579"/>
+                            <rect key="frame" x="0.0" y="202" width="414" height="579"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing to do!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dhi-qY-Ukx">
@@ -38,13 +38,48 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="biq-1o-WlL">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="todoCell" rowHeight="135" id="biq-1o-WlL" customClass="TodoTableViewCell" customModule="ToDos" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="135"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="biq-1o-WlL" id="Tnp-yn-eyO">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="135"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="timeLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dat-Pj-4x1">
+                                            <rect key="frame" x="20" y="87.5" width="79" height="27.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="todoTextLabel todoTextLabel todoTextLabel" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nyJ-eJ-nDC">
+                                            <rect key="frame" x="20" y="20" width="298" height="57.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="!!!" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UqE-ec-JHF">
+                                            <rect key="frame" x="338" y="20" width="56" height="43"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                            <color key="textColor" systemColor="systemPinkColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="nyJ-eJ-nDC" firstAttribute="top" secondItem="Tnp-yn-eyO" secondAttribute="top" constant="20" id="2GE-QQ-IHH"/>
+                                        <constraint firstItem="UqE-ec-JHF" firstAttribute="top" secondItem="nyJ-eJ-nDC" secondAttribute="top" id="FDP-EM-te0"/>
+                                        <constraint firstAttribute="bottom" secondItem="Dat-Pj-4x1" secondAttribute="bottom" constant="20" id="LlU-Gb-CA4"/>
+                                        <constraint firstItem="UqE-ec-JHF" firstAttribute="leading" secondItem="nyJ-eJ-nDC" secondAttribute="trailing" constant="20" id="R38-58-Bh4"/>
+                                        <constraint firstItem="Dat-Pj-4x1" firstAttribute="top" secondItem="nyJ-eJ-nDC" secondAttribute="bottom" constant="10" id="U6n-Et-Q7H"/>
+                                        <constraint firstAttribute="trailing" secondItem="UqE-ec-JHF" secondAttribute="trailing" constant="20" id="Ypx-fK-HiF"/>
+                                        <constraint firstItem="nyJ-eJ-nDC" firstAttribute="leading" secondItem="Tnp-yn-eyO" secondAttribute="leading" constant="20" id="iky-wk-Dcm"/>
+                                        <constraint firstItem="Dat-Pj-4x1" firstAttribute="leading" secondItem="nyJ-eJ-nDC" secondAttribute="leading" id="l7r-WU-qU9"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="priorityLabel" destination="UqE-ec-JHF" id="HuE-HM-yYu"/>
+                                    <outlet property="timeLabel" destination="Dat-Pj-4x1" id="fVo-EX-fCP"/>
+                                    <outlet property="todoTextLabel" destination="nyJ-eJ-nDC" id="KFn-nu-nna"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -69,7 +104,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1DU-t7-zad" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1730" y="15"/>
+            <point key="canvasLocation" x="1728.985507246377" y="14.732142857142856"/>
         </scene>
         <!--Entry View Controller-->
         <scene sceneID="OnJ-eJ-fCm">
@@ -79,7 +114,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="GWP-d0-XX6">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="GWP-d0-XX6">
                                 <rect key="frame" x="36" y="479" width="342" height="32"/>
                                 <color key="backgroundColor" red="0.92816525699999997" green="0.97235006089999998" blue="0.99343210459999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <segments>
@@ -87,7 +122,7 @@
                                     <segment title="medium"/>
                                     <segment title="high"/>
                                 </segments>
-                                <color key="tintColor" red="0.1756194532" green="0.6087966561" blue="0.94118779900000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" systemColor="systemRedColor"/>
                                 <color key="selectedSegmentTintColor" red="0.14901960780000001" green="0.65098039220000004" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="configureSegment:" destination="QA5-UA-5c8" eventType="valueChanged" id="Efj-JV-WUZ"/>
@@ -196,6 +231,12 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

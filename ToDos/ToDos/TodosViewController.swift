@@ -7,31 +7,39 @@
 
 import UIKit
 
-struct InputData {
-    var todoTask: String
-    var date: String
-}
-
 class TodosViewController: UITableViewController {
     
     //Making data array
-    var myData = [InputData]()
+    var myData = [Todo]()
     
     @IBOutlet var nothingTodoLabel: UILabel!
      
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let nib = UINib(nibName: "TableViewCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "TableViewCell")
-        
+
+        myData = makeMockTodos()
+
         tableView.delegate = self
         tableView.dataSource = self
+
+        tableView.allowsSelection = false
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        nothingTodoLabel.isHidden = !myData.isEmpty
     }
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
         let VC = EntryViewController()
         VC.delegate = self
+    }
+
+    private func makeMockTodos() -> [Todo] {
+        let todo1 = Todo(title: "Pick up groceries", date: Date().dayAfter, priority: .low)
+        let todo2 = Todo(title: "Buy Xmas tree", date: Date().dayAfter.dayAfter, priority: .medium)
+        let todo3 = Todo(title: "Send Xmas gifts", date: Date().dayAfter.dayAfter.dayAfter, priority: .high)
+        return [todo1, todo2, todo3]
     }
 }
 
@@ -47,13 +55,11 @@ extension TodosViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "todoCell", for: indexPath) as! TodoTableViewCell
         //Occupy cells at indexpath
-        cell.todoTextLabel?.text = myData[indexPath.row].todoTask
-        cell.timeLabel.text = myData[indexPath.row].date
-    
-        nothingTodoLabel.isHidden = true
-    
+        let todo = myData[indexPath.row]
+        cell.updateCell(with: todo)
+
         return cell
     }
 }
@@ -61,7 +67,7 @@ extension TodosViewController {
 //MARK: Compfort Delegate
 
 extension TodosViewController: AddInputDelegate {
-    func addData(data: InputData) {
+    func addData(data: Todo) {
         self.dismiss(animated: true) {
             self.myData.append(data)
             self.tableView.reloadData()

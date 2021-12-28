@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AddInputDelegate {
-    func addData(data: InputData)
+    func addData(data: Todo)
 }
 
 
@@ -32,8 +32,16 @@ class EntryViewController: UIViewController {
         saveInputs()
         save()
 
+        stylePriorityControl()
     }
-    
+
+    private func stylePriorityControl() {
+        priorityControl.selectedSegmentTintColor = .todoBlue
+        priorityControl.tintColor = .todoLightBlue
+        priorityControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+        priorityControl.setTitleTextAttributes([.foregroundColor: UIColor.todoBlue], for: .normal)
+    }
+
     func configToolbar() -> UIToolbar {
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
@@ -55,15 +63,13 @@ class EntryViewController: UIViewController {
     }
     
     @objc func donePressed() {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        dateTextFeild.text = formatter.string(from: datePicker.date)
+        dateTextFeild.text = datePicker.date.shortDateString
         self.view.endEditing(true)
     }
     
     @IBAction func configureSegment(_ sender: UISegmentedControl) {
         let selectedIndex = priorityControl.isSelected
+
         if !selectedIndex {
             priorityControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: UIControl.State.selected)
 
@@ -94,12 +100,12 @@ class EntryViewController: UIViewController {
         
         guard let todoTask = whatToDoTextFeild.text, !todoTask.isEmpty else {  return }
         guard let date = dateTextFeild.text, !date.isEmpty else { return }
-        
-        let data = InputData(todoTask: todoTask, date: date)
+
+        let data = Todo(title: todoTask, date: datePicker.date, priority: Priority(rawValue: priorityControl.selectedSegmentIndex)!)
         delegate?.addData(data: data)
         
         //Check if you can get the input data
-        print(data.todoTask)
+        print(data.title)
         print(data.date)
         dismiss(animated: true)
     }
@@ -120,19 +126,15 @@ class EntryViewController: UIViewController {
     
         
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
-        let todoTask = whatToDoTextFeild.text
-        let date = dateTextFeild.text
-        UserDefaults.standard.set(todoTask, forKey: "todoTask")
-        UserDefaults.standard.set(date, forKey: "date")
-        
         guard let todoTask = whatToDoTextFeild.text, !todoTask.isEmpty else {  return }
         guard let date = dateTextFeild.text, !date.isEmpty else { return }
-        
-        let data = InputData(todoTask: todoTask, date: date)
+
+        let data = Todo(title: todoTask, date: datePicker.date, priority: Priority(rawValue: priorityControl.selectedSegmentIndex)!)
+        UserDefaults.standard.set(data, forKey: data.id.uuidString)
         delegate?.addData(data: data)
         
         //Check if you can get the input data
-        print(data.todoTask)
+        print(data.title)
         print(data.date)
         dismiss(animated: true)
         
