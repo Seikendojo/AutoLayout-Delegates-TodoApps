@@ -38,25 +38,35 @@ class EntryViewController: UIViewController {
         priorityControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         priorityControl.setTitleTextAttributes([.foregroundColor: UIColor.todoBlue], for: .normal)
     }
+    
+    
+    //MARK: Configure TextField
 
-    func configToolbar() -> UIToolbar {
-        let toolBar = UIToolbar()
-        toolBar.sizeToFit()
-        
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done,
-                                         target: nil,
-                                         action: #selector(donePressed))
-        toolBar.setItems([doneButton], animated: true)
-        return toolBar
+    func configDateTextField() {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, yyyy"
+        dateTextFeild.text = formatter.string(from: date)
+        dateTextFeild.textColor = .blue
     }
     
+    //MARK: Configure date picker
+    
     func configDatePicker() {
-        datePicker.preferredDatePickerStyle = .wheels
+        let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
+        datePicker.addTarget(self, action: #selector(datePickerValueChanged(sender:)), for: UIControl.Event.valueChanged)
+        datePicker.frame.size = CGSize(width: 0, height: 50)
         dateTextFeild.inputView = datePicker
-        dateTextFeild.inputAccessoryView = configToolbar()
-        dateTextFeild.textAlignment = .center
+        
     }
+    
+    @objc func datePickerValueChanged(sender: UIDatePicker) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, yyyy"
+        dateTextFeild.text = formatter.string(from: sender.date)
+    }
+    
     
     @objc func donePressed() {
         dateTextFeild.text = datePicker.date.shortDateString
