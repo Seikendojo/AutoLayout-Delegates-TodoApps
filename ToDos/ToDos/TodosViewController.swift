@@ -9,7 +9,6 @@ import UIKit
 
 class TodosViewController: UITableViewController {
     
-    //Making data array
     var myData = [Todo]()
     
     @IBOutlet var nothingTodoLabel: UILabel!
