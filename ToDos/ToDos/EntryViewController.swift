@@ -27,11 +27,21 @@ class EntryViewController: UIViewController {
         super.viewDidLoad()
         configDateTextField()
         stylePriorityControl()
+        configTapGesture()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         whatToDoTextFeild.becomeFirstResponder()
+    }
+    
+    private func configTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func handleTap() {
+        view.endEditing(true)
     }
 
     private func stylePriorityControl() {
