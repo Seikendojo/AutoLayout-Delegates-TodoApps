@@ -12,6 +12,7 @@
 		EB5C4BFA277ADB140060255D /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5C4BF9277ADB140060255D /* Todo.swift */; };
 		EB5C4BFC277ADDA90060255D /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5C4BFB277ADDA90060255D /* Date+Extensions.swift */; };
 		EB5C4BFF277AE8CE0060255D /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5C4BFE277AE8CE0060255D /* UIColor+Extensions.swift */; };
+		EB5C4C01278567C50060255D /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5C4C00278567C50060255D /* UITextField+Extensions.swift */; };
 		EB7F2028276E8ECC00315C49 /* TodosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F2027276E8ECC00315C49 /* TodosViewController.swift */; };
 		EBB18C6F276BB6FE00483345 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB18C6E276BB6FE00483345 /* AppDelegate.swift */; };
 		EBB18C71276BB6FE00483345 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB18C70276BB6FE00483345 /* SceneDelegate.swift */; };
@@ -26,6 +27,7 @@
 		EB5C4BF9277ADB140060255D /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		EB5C4BFB277ADDA90060255D /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		EB5C4BFE277AE8CE0060255D /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		EB5C4C00278567C50060255D /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		EB7F2027276E8ECC00315C49 /* TodosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosViewController.swift; sourceTree = "<group>"; };
 		EBB18C6B276BB6FE00483345 /* ToDos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBB18C6E276BB6FE00483345 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -52,6 +54,7 @@
 			children = (
 				EB5C4BFB277ADDA90060255D /* Date+Extensions.swift */,
 				EB5C4BFE277AE8CE0060255D /* UIColor+Extensions.swift */,
+				EB5C4C00278567C50060255D /* UITextField+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -167,6 +170,7 @@
 				EB5C4BFF277AE8CE0060255D /* UIColor+Extensions.swift in Sources */,
 				EBB18C6F276BB6FE00483345 /* AppDelegate.swift in Sources */,
 				13D23F28276EB59100869EBC /* EntryViewController.swift in Sources */,
+				EB5C4C01278567C50060255D /* UITextField+Extensions.swift in Sources */,
 				EB7F2028276E8ECC00315C49 /* TodosViewController.swift in Sources */,
 				EBB18C71276BB6FE00483345 /* SceneDelegate.swift in Sources */,
 			);

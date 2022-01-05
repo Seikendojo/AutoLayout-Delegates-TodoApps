@@ -11,7 +11,6 @@ protocol AddInputDelegate {
     func addData(data: Todo)
 }
 
-
 class EntryViewController: UIViewController {
     
     var delegate: AddInputDelegate?
@@ -21,15 +20,18 @@ class EntryViewController: UIViewController {
     @IBOutlet var priorityControl: UISegmentedControl!
     @IBOutlet var saveBarButton: UIBarButtonItem!
     
-    let datePicker = UIDatePicker()
+    private let datePicker = UIDatePicker()
     var dataArray: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        whatToDoTextFeild.becomeFirstResponder()
-        configDatePicker()
-        save()
+        configDateTextField()
         stylePriorityControl()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        whatToDoTextFeild.becomeFirstResponder()
     }
 
     private func stylePriorityControl() {
@@ -38,41 +40,26 @@ class EntryViewController: UIViewController {
         priorityControl.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
         priorityControl.setTitleTextAttributes([.foregroundColor: UIColor.todoBlue], for: .normal)
     }
-    
-    
+
     //MARK: Configure TextField
 
     func configDateTextField() {
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d, yyyy"
-        dateTextFeild.text = formatter.string(from: date)
-        dateTextFeild.textColor = .blue
+        dateTextFeild.addDatePicker(target: self, doneAction: #selector(doneAction), cancelAction: #selector(cancelAction))
     }
-    
-    //MARK: Configure date picker
-    
-    func configDatePicker() {
-        let datePicker = UIDatePicker()
-        datePicker.datePickerMode = .date
-        datePicker.addTarget(self, action: #selector(datePickerValueChanged(sender:)), for: UIControl.Event.valueChanged)
-        datePicker.frame.size = CGSize(width: 0, height: 50)
-        dateTextFeild.inputView = datePicker
-        
+
+    @objc
+    func cancelAction() {
+        dateTextFeild.resignFirstResponder()
     }
-    
-    @objc func datePickerValueChanged(sender: UIDatePicker) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMM d, yyyy"
-        dateTextFeild.text = formatter.string(from: sender.date)
+
+    @objc
+    func doneAction() {
+        if let datePickerView = dateTextFeild.inputView as? UIDatePicker {
+            dateTextFeild.text = datePickerView.date.shortDateString
+            dateTextFeild.resignFirstResponder()
+        }
     }
-    
-    
-    @objc func donePressed() {
-        dateTextFeild.text = datePicker.date.shortDateString
-        self.view.endEditing(true)
-    }
-    
+
     @IBAction func configureSegment(_ sender: UISegmentedControl) {
         let selectedIndex = priorityControl.isSelected
 
@@ -82,19 +69,18 @@ class EntryViewController: UIViewController {
     }
 
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
-        guard let todoTask = whatToDoTextFeild.text, !todoTask.isEmpty else {  return }
-        guard let date = dateTextFeild.text, !date.isEmpty else { return }
+        guard let todoTask = whatToDoTextFeild.text, !todoTask.isEmpty,
+                let priority = Priority(rawValue: priorityControl.selectedSegmentIndex) else { return }
 
-        let data = Todo(title: todoTask, date: datePicker.date, priority: Priority(rawValue: priorityControl.selectedSegmentIndex)!)
-        UserDefaults.standard.set(data, forKey: data.id.uuidString)
-        delegate?.addData(data: data)
+        let todo = Todo(title: todoTask, date: datePicker.date, priority: priority)
+        var todos = UserDefaults.standard.value(forKey: "todos") as? [[String: Any]] ?? [[String: Any]]()
+        todos.append(todo.dictionary)
+        UserDefaults.standard.set(todos, forKey: "todos")
+        delegate?.addData(data: todo)
+        dismiss(animated: true)
     }
 
-    func save() {
-        guard let todoTask = whatToDoTextFeild.text, !todoTask.isEmpty else {  return }
-        guard let date = dateTextFeild.text, !date.isEmpty else { return }
-
-        let data = Todo(title: todoTask, date: datePicker.date, priority: Priority(rawValue: priorityControl.selectedSegmentIndex)!)
-        UserDefaults.standard.string(forKey: data.id.uuidString)
+    @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
     }
 }

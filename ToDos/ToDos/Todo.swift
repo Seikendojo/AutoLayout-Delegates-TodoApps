@@ -34,4 +34,11 @@ struct Todo {
     let title: String
     let date: Date
     let priority: Priority
+
+    var dictionary: [String: Any] {
+        ["id": id.uuidString,
+         "title": title,
+         "date": date,
+         "priority": priority.rawValue]
+    }
 }
