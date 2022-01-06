@@ -30,15 +30,24 @@ enum Priority: Int {
 }
 
 struct Todo {
-    let id = UUID()
+    var id = UUID().uuidString
     let title: String
     let date: Date
     let priority: Priority
 
     var dictionary: [String: Any] {
-        ["id": id.uuidString,
+        ["id": id,
          "title": title,
          "date": date,
          "priority": priority.rawValue]
+    }
+
+    static func parse(from dict: [String: Any]) -> Todo? {
+        guard let id = dict["id"] as? String,
+              let title = dict["title"] as? String,
+              let date = dict["date"] as? Date,
+              let priority = Priority(rawValue: dict["priority"] as? Int ?? 0)
+        else { return nil }
+        return Todo(id: id, title: title, date: date, priority: priority)
     }
 }

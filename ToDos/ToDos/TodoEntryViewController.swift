@@ -1,5 +1,5 @@
 //
-//  EntryViewController.swift
+//  TodoEntryViewController.swift
 //  ToDos
 //
 //  Created by Sia on 2021-12-18.
@@ -11,18 +11,18 @@ protocol AddInputDelegate {
     func addData(data: Todo)
 }
 
-class EntryViewController: UIViewController {
-    
+class TodoEntryViewController: UIViewController {
+
     var delegate: AddInputDelegate?
-    
+
     @IBOutlet var whatToDoTextFeild: UITextField!
     @IBOutlet var dateTextFeild: UITextField!
     @IBOutlet var priorityControl: UISegmentedControl!
     @IBOutlet var saveBarButton: UIBarButtonItem!
-    
-    private let datePicker = UIDatePicker()
+
+    private var datePicker = UIDatePicker()
     var dataArray: [String] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configDateTextField()
@@ -34,12 +34,12 @@ class EntryViewController: UIViewController {
         super.viewDidAppear(animated)
         whatToDoTextFeild.becomeFirstResponder()
     }
-    
+
     private func configTapGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         view.addGestureRecognizer(tapGesture)
     }
-    
+
     @objc func handleTap() {
         view.endEditing(true)
     }
@@ -67,6 +67,7 @@ class EntryViewController: UIViewController {
         if let datePickerView = dateTextFeild.inputView as? UIDatePicker {
             dateTextFeild.text = datePickerView.date.shortDateString
             dateTextFeild.resignFirstResponder()
+            datePicker = datePickerView
         }
     }
 

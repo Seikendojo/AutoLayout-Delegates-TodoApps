@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1307E6DB27701026000AA6FD /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1307E6D927701026000AA6FD /* TodoTableViewCell.swift */; };
-		13D23F28276EB59100869EBC /* EntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D23F27276EB59100869EBC /* EntryViewController.swift */; };
+		13D23F28276EB59100869EBC /* TodoEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D23F27276EB59100869EBC /* TodoEntryViewController.swift */; };
 		EB5C4BFA277ADB140060255D /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5C4BF9277ADB140060255D /* Todo.swift */; };
 		EB5C4BFC277ADDA90060255D /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5C4BFB277ADDA90060255D /* Date+Extensions.swift */; };
 		EB5C4BFF277AE8CE0060255D /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5C4BFE277AE8CE0060255D /* UIColor+Extensions.swift */; };
@@ -23,7 +23,7 @@
 
 /* Begin PBXFileReference section */
 		1307E6D927701026000AA6FD /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
-		13D23F27276EB59100869EBC /* EntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryViewController.swift; sourceTree = "<group>"; };
+		13D23F27276EB59100869EBC /* TodoEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEntryViewController.swift; sourceTree = "<group>"; };
 		EB5C4BF9277ADB140060255D /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		EB5C4BFB277ADDA90060255D /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		EB5C4BFE277AE8CE0060255D /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
@@ -83,7 +83,7 @@
 				EB5C4BF9277ADB140060255D /* Todo.swift */,
 				EB5C4BFD277AE8B60060255D /* Extensions */,
 				EB7F2027276E8ECC00315C49 /* TodosViewController.swift */,
-				13D23F27276EB59100869EBC /* EntryViewController.swift */,
+				13D23F27276EB59100869EBC /* TodoEntryViewController.swift */,
 				1307E6D927701026000AA6FD /* TodoTableViewCell.swift */,
 				EBB18C74276BB6FE00483345 /* Main.storyboard */,
 				EBB18C77276BB6FF00483345 /* Assets.xcassets */,
@@ -169,7 +169,7 @@
 				EB5C4BFC277ADDA90060255D /* Date+Extensions.swift in Sources */,
 				EB5C4BFF277AE8CE0060255D /* UIColor+Extensions.swift in Sources */,
 				EBB18C6F276BB6FE00483345 /* AppDelegate.swift in Sources */,
-				13D23F28276EB59100869EBC /* EntryViewController.swift in Sources */,
+				13D23F28276EB59100869EBC /* TodoEntryViewController.swift in Sources */,
 				EB5C4C01278567C50060255D /* UITextField+Extensions.swift in Sources */,
 				EB7F2028276E8ECC00315C49 /* TodosViewController.swift in Sources */,
 				EBB18C71276BB6FE00483345 /* SceneDelegate.swift in Sources */,

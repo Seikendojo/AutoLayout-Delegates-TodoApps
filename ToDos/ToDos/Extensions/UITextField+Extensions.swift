@@ -41,6 +41,7 @@ extension UITextField {
                                                     height: 216))
         datePicker.datePickerMode = datePickerMode
         datePicker.preferredDatePickerStyle = .inline
+        datePicker.minimumDate = Date()
         inputView = datePicker
 
         let toolBar = UIToolbar(frame: CGRect(x: 0,

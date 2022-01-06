@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3Iy-ws-q7O">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3Iy-ws-q7O">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -96,7 +96,6 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="CPd-c6-pXh">
                             <connections>
                                 <action selector="addButtonTapped:" destination="rld-mK-UB4" id="PUl-S6-wgF"/>
-                                <segue destination="gaC-g9-3eF" kind="presentation" id="kJf-jp-sqn"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -104,16 +103,17 @@
                     <connections>
                         <outlet property="nothingTodoLabel" destination="Dhi-qY-Ukx" id="FY9-Ea-Sh7"/>
                         <outlet property="tableView" destination="8Mf-30-2HQ" id="fLp-Mb-HOm"/>
+                        <segue destination="gaC-g9-3eF" kind="presentation" identifier="showTodoEntry" id="Sqa-K1-aaL"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1DU-t7-zad" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1826" y="15"/>
         </scene>
-        <!--Entry View Controller-->
+        <!--Todo Entry View Controller-->
         <scene sceneID="OnJ-eJ-fCm">
             <objects>
-                <viewController storyboardIdentifier="EntryViewController" id="QA5-UA-5c8" customClass="EntryViewController" customModule="ToDos" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EntryViewController" id="QA5-UA-5c8" customClass="TodoEntryViewController" customModule="ToDos" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U2G-xZ-BL0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -224,7 +224,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nhq-hu-Xiq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="933" y="15"/>
+            <point key="canvasLocation" x="991" y="15"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xt5-Eu-py2">
@@ -242,7 +242,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cBQ-zM-dCC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2637.68115942029" y="14.732142857142856"/>
+            <point key="canvasLocation" x="2684" y="15"/>
         </scene>
     </scenes>
     <resources>
