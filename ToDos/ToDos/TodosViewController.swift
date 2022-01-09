@@ -8,6 +8,13 @@
 import UIKit
 
 class TodosViewController: UITableViewController {
+
+    // 1. create a class called PersistenceManager
+    // 2. initialize the manager at the time the app launches
+    // 3. define a method to retrieve all Todo objects
+    // 4. define a method to save a new Todo object
+    // 5. set myData with the result of the retrieval function
+
     private var myData: [Todo] = {
         var todos = [Todo]()
         if let retrievedTodos = UserDefaults.standard.value(forKey: "todos") as? [[String: Any]] {
@@ -20,6 +27,7 @@ class TodosViewController: UITableViewController {
         return todos.sorted(by: { $0.date.compare($1.date) == .orderedAscending })
     }()
 
+    //    var persistenceManager: PersistenceManager?
     @IBOutlet var nothingTodoLabel: UILabel!
 
     override func viewDidLoad() {
@@ -27,6 +35,8 @@ class TodosViewController: UITableViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.allowsSelection = false
+
+//        myData = persistenceManager.retrieveTodos
     }
 
     override func viewWillAppear(_ animated: Bool) {

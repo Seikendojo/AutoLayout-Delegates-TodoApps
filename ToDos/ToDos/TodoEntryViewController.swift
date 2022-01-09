@@ -14,6 +14,7 @@ protocol AddInputDelegate {
 class TodoEntryViewController: UIViewController {
 
     var delegate: AddInputDelegate?
+//    var persistenceManager: PersistenceManager?
 
     @IBOutlet var whatToDoTextFeild: UITextField!
     @IBOutlet var dateTextFeild: UITextField!
@@ -87,6 +88,7 @@ class TodoEntryViewController: UIViewController {
         var todos = UserDefaults.standard.value(forKey: "todos") as? [[String: Any]] ?? [[String: Any]]()
         todos.append(todo.dictionary)
         UserDefaults.standard.set(todos, forKey: "todos")
+        // persistenceManager.save(todo)
         delegate?.addData(data: todo)
         dismiss(animated: true)
     }
