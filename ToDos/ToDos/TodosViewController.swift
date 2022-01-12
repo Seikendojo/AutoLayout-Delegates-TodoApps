@@ -9,12 +9,13 @@ import UIKit
 
 class TodosViewController: UITableViewController {
 
+
     // 1. create a class called PersistenceManager
     // 2. initialize the manager at the time the app launches
     // 3. define a method to retrieve all Todo objects
     // 4. define a method to save a new Todo object
     // 5. set myData with the result of the retrieval function
-
+ 
     private var myData: [Todo] = {
         var todos = [Todo]()
         if let retrievedTodos = UserDefaults.standard.value(forKey: "todos") as? [[String: Any]] {
@@ -35,6 +36,7 @@ class TodosViewController: UITableViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.allowsSelection = false
+        
 
 //        myData = persistenceManager.retrieveTodos
     }
@@ -69,6 +71,38 @@ extension TodosViewController {
         let todo = myData[indexPath.row]
         cell.updateCell(with: todo)
         return cell
+    }
+    
+    //Trailing action to delete todo
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            myData.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+
+    //Leading action to strikethrough the todo text
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let doneAction = UIContextualAction(style: .normal, title: "Done") { (action, sourceView, completionHandler) in
+            //Replace the old todo with a new version of it
+            let newTodo = self.myData[indexPath.row]
+            self.myData[indexPath.row] = newTodo
+            
+            //Grab the cell from tableViewCell
+            let cell = tableView.cellForRow(at: indexPath) as! TodoTableViewCell
+            
+            //Get the title and cross it out
+            cell.strikeThroughText()
+            completionHandler(true)
+        }
+        
+        doneAction.backgroundColor = UIColor.todoGreen
+        return UISwipeActionsConfiguration(actions: [doneAction])
     }
 }
 

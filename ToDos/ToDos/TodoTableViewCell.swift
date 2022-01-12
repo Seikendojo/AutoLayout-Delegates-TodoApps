@@ -12,15 +12,13 @@ class TodoTableViewCell: UITableViewCell {
     @IBOutlet private var timeLabel: UILabel!
     @IBOutlet private var priorityLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
+      func strikeThroughText() {
+        guard let text = todoTextLabel.text else { return }
+        let attributedString: NSMutableAttributedString =  NSMutableAttributedString(string: text)
+        attributedString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributedString.length))
+        todoTextLabel.attributedText = attributedString
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-
+    
     func updateCell(with todo: Todo) {
         todoTextLabel.text = todo.title
         timeLabel.text = todo.date.shortDateString
@@ -28,3 +26,6 @@ class TodoTableViewCell: UITableViewCell {
         priorityLabel.textColor = todo.priority.color
     }
 }
+
+
+

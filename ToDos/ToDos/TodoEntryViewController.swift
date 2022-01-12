@@ -22,7 +22,6 @@ class TodoEntryViewController: UIViewController {
     @IBOutlet var saveBarButton: UIBarButtonItem!
 
     private var datePicker = UIDatePicker()
-    var dataArray: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
