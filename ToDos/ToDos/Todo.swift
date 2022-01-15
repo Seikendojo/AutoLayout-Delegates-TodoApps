@@ -34,20 +34,23 @@ struct Todo {
     let title: String
     let date: Date
     let priority: Priority
+    var isCompleted = false
 
     var dictionary: [String: Any] {
         ["id": id,
          "title": title,
          "date": date,
-         "priority": priority.rawValue]
+         "priority": priority.rawValue,
+         "isCompleted": isCompleted]
     }
 
     static func parse(from dict: [String: Any]) -> Todo? {
         guard let id = dict["id"] as? String,
               let title = dict["title"] as? String,
               let date = dict["date"] as? Date,
-              let priority = Priority(rawValue: dict["priority"] as? Int ?? 0)
+              let priority = Priority(rawValue: dict["priority"] as? Int ?? 0),
+              let isCompleted = dict["isCompleted"] as? Bool
         else { return nil }
-        return Todo(id: id, title: title, date: date, priority: priority)
+        return Todo(id: id, title: title, date: date, priority: priority, isCompleted: isCompleted)
     }
 }

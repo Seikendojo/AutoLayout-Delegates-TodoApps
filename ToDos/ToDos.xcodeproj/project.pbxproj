@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1307E6DB27701026000AA6FD /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1307E6D927701026000AA6FD /* TodoTableViewCell.swift */; };
 		13D23F28276EB59100869EBC /* TodoEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D23F27276EB59100869EBC /* TodoEntryViewController.swift */; };
+		EB202A2D2793570700DB1945 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB202A2C2793570700DB1945 /* String+Extensions.swift */; };
 		EB5C4BFA277ADB140060255D /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5C4BF9277ADB140060255D /* Todo.swift */; };
 		EB5C4BFC277ADDA90060255D /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5C4BFB277ADDA90060255D /* Date+Extensions.swift */; };
 		EB5C4BFF277AE8CE0060255D /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5C4BFE277AE8CE0060255D /* UIColor+Extensions.swift */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		1307E6D927701026000AA6FD /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
 		13D23F27276EB59100869EBC /* TodoEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEntryViewController.swift; sourceTree = "<group>"; };
+		EB202A2C2793570700DB1945 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		EB5C4BF9277ADB140060255D /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		EB5C4BFB277ADDA90060255D /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		EB5C4BFE277AE8CE0060255D /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				EB5C4BFB277ADDA90060255D /* Date+Extensions.swift */,
+				EB202A2C2793570700DB1945 /* String+Extensions.swift */,
 				EB5C4BFE277AE8CE0060255D /* UIColor+Extensions.swift */,
 				EB5C4C00278567C50060255D /* UITextField+Extensions.swift */,
 			);
@@ -164,6 +167,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB202A2D2793570700DB1945 /* String+Extensions.swift in Sources */,
 				1307E6DB27701026000AA6FD /* TodoTableViewCell.swift in Sources */,
 				EB5C4BFA277ADB140060255D /* Todo.swift in Sources */,
 				EB5C4BFC277ADDA90060255D /* Date+Extensions.swift in Sources */,

@@ -18,9 +18,9 @@ class TodosViewController: UITableViewController {
  
     private var myData: [Todo] = {
         var todos = [Todo]()
-        if let retrievedTodos = UserDefaults.standard.value(forKey: "todos") as? [[String: Any]] {
-            retrievedTodos.forEach { todoDict in
-                if let todo = Todo.parse(from: todoDict) {
+        if let retrievedTodos = UserDefaults.standard.value(forKey: "todos") as? [String: Any] {
+            retrievedTodos.values.forEach { todoDict in
+                if let todo = Todo.parse(from: todoDict as! [String : Any]) {
                     todos.append(todo)
                 }
             }
@@ -80,7 +80,13 @@ extension TodosViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            let todoToDelete = myData[indexPath.row]
             myData.remove(at: indexPath.row)
+
+            var todosDict = UserDefaults.standard.value(forKey: "todos") as? [String: Any]
+            todosDict?.removeValue(forKey: todoToDelete.id)
+            UserDefaults.standard.set(todosDict, forKey: "todos")
+
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
@@ -88,16 +94,35 @@ extension TodosViewController {
     //Leading action to strikethrough the todo text
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let doneAction = UIContextualAction(style: .normal, title: "Done") { (action, sourceView, completionHandler) in
+        let doneAction = UIContextualAction(style: .normal, title: "Done") { [weak self] (action, sourceView, completionHandler) in
+            guard let self = self else { return }
             //Replace the old todo with a new version of it
-            let newTodo = self.myData[indexPath.row]
-            self.myData[indexPath.row] = newTodo
+            var newTodo = self.myData[indexPath.row]
+            newTodo.isCompleted = true
             
             //Grab the cell from tableViewCell
             let cell = tableView.cellForRow(at: indexPath) as! TodoTableViewCell
             
             //Get the title and cross it out
-            cell.strikeThroughText()
+            cell.updateCell(with: newTodo)
+
+            // step 0
+            // retrieve `todos` from UserDefaults
+            var todosDict = UserDefaults.standard.value(forKey: "todos") as? [String: Any] ?? [String: Any]()
+
+            // step 1
+            // find the matching dictionary in UserDefaults
+            var todoDict = todosDict[newTodo.id] as? [String: Any]
+
+            // step 2
+            // set the `isCompleted` value for the dictionary
+            todoDict?["isCompleted"] = newTodo.isCompleted
+
+            // step 3
+            // save the `todos` array back into UserDefaults
+            todosDict[newTodo.id] = todoDict
+            UserDefaults.standard.set(todosDict, forKey: "todos")
+
             completionHandler(true)
         }
         

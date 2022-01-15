@@ -84,8 +84,8 @@ class TodoEntryViewController: UIViewController {
                 let priority = Priority(rawValue: priorityControl.selectedSegmentIndex) else { return }
 
         let todo = Todo(title: todoTask, date: datePicker.date, priority: priority)
-        var todos = UserDefaults.standard.value(forKey: "todos") as? [[String: Any]] ?? [[String: Any]]()
-        todos.append(todo.dictionary)
+        var todos = UserDefaults.standard.value(forKey: "todos") as? [String: Any] ?? [String: Any]()
+        todos[todo.id] = todo.dictionary
         UserDefaults.standard.set(todos, forKey: "todos")
         // persistenceManager.save(todo)
         delegate?.addData(data: todo)
