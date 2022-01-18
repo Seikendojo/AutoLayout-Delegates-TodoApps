@@ -88,6 +88,7 @@ extension TodosViewController {
             UserDefaults.standard.set(todosDict, forKey: "todos")
 
             tableView.deleteRows(at: [indexPath], with: .fade)
+            reloadData()
         }
     }
 
