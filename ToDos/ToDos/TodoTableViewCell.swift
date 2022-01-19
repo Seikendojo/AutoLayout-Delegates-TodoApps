@@ -20,10 +20,11 @@ class TodoTableViewCell: UITableViewCell {
         if let todo = todo {
             if todo.isCompleted {
                 todoTextLabel.attributedText = todo.title.strikeThrough
+                timeLabel.attributedText = todo.date.shortDateString.strikeThrough
             } else {
                 todoTextLabel.text = todo.title
+                timeLabel.text = todo.date.shortDateString
             }
-            timeLabel.text = todo.date.shortDateString
             priorityLabel.text = todo.priority.symbol
             priorityLabel.textColor = todo.priority.color
         } else {

@@ -9,26 +9,9 @@ import UIKit
 
 class TodosViewController: UITableViewController {
 
+    private let persistenceManager = PersistencManager()
+    private var myData = [Todo]()
 
-    // 1. create a class called PersistenceManager
-    // 2. initialize the manager at the time the app launches
-    // 3. define a method to retrieve all Todo objects
-    // 4. define a method to save a new Todo object
-    // 5. set myData with the result of the retrieval function
- 
-    private var myData: [Todo] = {
-        var todos = [Todo]()
-        if let retrievedTodos = UserDefaults.standard.value(forKey: "todos") as? [String: Any] {
-            retrievedTodos.values.forEach { todoDict in
-                if let todo = Todo.parse(from: todoDict as! [String : Any]) {
-                    todos.append(todo)
-                }
-            }
-        }
-        return todos.sorted(by: { $0.date.compare($1.date) == .orderedAscending })
-    }()
-
-    //    var persistenceManager: PersistenceManager?
     @IBOutlet var nothingTodoLabel: UILabel!
 
     override func viewDidLoad() {
@@ -36,9 +19,8 @@ class TodosViewController: UITableViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.allowsSelection = false
-        
 
-//        myData = persistenceManager.retrieveTodos
+        myData = persistenceManager.retrieveTodos().sortedByDate
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +38,7 @@ class TodosViewController: UITableViewController {
             let navController = segue.destination as? UINavigationController
             let todoEntryVC = navController?.viewControllers.first as? TodoEntryViewController
             todoEntryVC?.delegate = self
+            todoEntryVC?.persistenceManager = persistenceManager
         }
     }
 }
@@ -72,20 +55,18 @@ extension TodosViewController {
         cell.updateCell(with: todo)
         return cell
     }
-    
+
     //Trailing action to delete todo
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
     }
-    
+
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let todoToDelete = myData[indexPath.row]
             myData.remove(at: indexPath.row)
 
-            var todosDict = UserDefaults.standard.value(forKey: "todos") as? [String: Any]
-            todosDict?.removeValue(forKey: todoToDelete.id)
-            UserDefaults.standard.set(todosDict, forKey: "todos")
+            persistenceManager.delete(todoToDelete)
 
             tableView.deleteRows(at: [indexPath], with: .fade)
             reloadData()
@@ -94,39 +75,19 @@ extension TodosViewController {
 
     //Leading action to strikethrough the todo text
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
+
         let doneAction = UIContextualAction(style: .normal, title: "Done") { [weak self] (action, sourceView, completionHandler) in
             guard let self = self else { return }
-            //Replace the old todo with a new version of it
-            var newTodo = self.myData[indexPath.row]
-            newTodo.isCompleted = true
-            
-            //Grab the cell from tableViewCell
+            var todoToUpdate = self.myData[indexPath.row]
+            todoToUpdate.isCompleted = true
             let cell = tableView.cellForRow(at: indexPath) as! TodoTableViewCell
-            
-            //Get the title and cross it out
-            cell.updateCell(with: newTodo)
+            cell.updateCell(with: todoToUpdate)
 
-            // step 0
-            // retrieve `todos` from UserDefaults
-            var todosDict = UserDefaults.standard.value(forKey: "todos") as? [String: Any] ?? [String: Any]()
-
-            // step 1
-            // find the matching dictionary in UserDefaults
-            var todoDict = todosDict[newTodo.id] as? [String: Any]
-
-            // step 2
-            // set the `isCompleted` value for the dictionary
-            todoDict?["isCompleted"] = newTodo.isCompleted
-
-            // step 3
-            // save the `todos` array back into UserDefaults
-            todosDict[newTodo.id] = todoDict
-            UserDefaults.standard.set(todosDict, forKey: "todos")
+            self.persistenceManager.save(todoToUpdate)
 
             completionHandler(true)
         }
-        
+
         doneAction.backgroundColor = UIColor.todoGreen
         return UISwipeActionsConfiguration(actions: [doneAction])
     }
@@ -136,7 +97,7 @@ extension TodosViewController {
 extension TodosViewController: AddInputDelegate {
     func addData(data: Todo) {
         myData.append(data)
-        myData = myData.sorted(by: { $0.date.compare($1.date) == .orderedAscending })
+        myData = myData.sortedByDate
         reloadData()
     }
 
