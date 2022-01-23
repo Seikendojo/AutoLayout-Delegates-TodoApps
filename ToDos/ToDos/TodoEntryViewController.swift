@@ -14,7 +14,6 @@ protocol AddInputDelegate {
 class TodoEntryViewController: UIViewController {
 
     var delegate: AddInputDelegate?
-    var persistenceManager: PersistencManager?
 
     @IBOutlet var whatToDoTextFeild: UITextField!
     @IBOutlet var dateTextFeild: UITextField!
@@ -83,7 +82,6 @@ class TodoEntryViewController: UIViewController {
         guard let todoTask = whatToDoTextFeild.text, !todoTask.isEmpty,
                 let priority = Priority(rawValue: priorityControl.selectedSegmentIndex) else { return }
         let todo = Todo(title: todoTask, date: datePicker.date, priority: priority)
-        persistenceManager?.save(todo)
         delegate?.addData(data: todo)
         dismiss(animated: true)
     }

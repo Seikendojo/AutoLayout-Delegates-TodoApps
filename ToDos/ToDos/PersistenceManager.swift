@@ -9,9 +9,13 @@ import Foundation
 
 struct PersistencManager {
 
+    private var todosDict: [String: Any]? {
+        UserDefaults.standard.value(forKey: "todos") as? [String: Any]
+    }
+
     func retrieveTodos() -> [Todo] {
         var todos = [Todo]()
-        if let retrievedTodos = UserDefaults.standard.value(forKey: "todos") as? [String: Any] {
+        if let retrievedTodos = todosDict {
             retrievedTodos.values.forEach { todoDict in
                 if let todo = Todo.parse(from: todoDict as! [String : Any]) {
                     todos.append(todo)
@@ -22,13 +26,13 @@ struct PersistencManager {
     }
 
     func save(_ todo: Todo) {
-        var todos = UserDefaults.standard.value(forKey: "todos") as? [String: Any] ?? [String: Any]()
-        todos[todo.id] = todo.dictionary
-        UserDefaults.standard.set(todos, forKey: "todos")
+        var todosDict = todosDict ?? [String: Any]()
+        todosDict[todo.id] = todo.dictionary
+        UserDefaults.standard.set(todosDict, forKey: "todos")
     }
 
     func delete(_ todo: Todo) {
-        var todosDict = UserDefaults.standard.value(forKey: "todos") as? [String: Any]
+        var todosDict = self.todosDict
         todosDict?.removeValue(forKey: todo.id)
         UserDefaults.standard.set(todosDict, forKey: "todos")
     }

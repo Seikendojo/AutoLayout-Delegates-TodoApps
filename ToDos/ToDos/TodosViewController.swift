@@ -38,7 +38,6 @@ class TodosViewController: UITableViewController {
             let navController = segue.destination as? UINavigationController
             let todoEntryVC = navController?.viewControllers.first as? TodoEntryViewController
             todoEntryVC?.delegate = self
-            todoEntryVC?.persistenceManager = persistenceManager
         }
     }
 }
@@ -96,6 +95,7 @@ extension TodosViewController {
 //MARK: Compfort Delegate
 extension TodosViewController: AddInputDelegate {
     func addData(data: Todo) {
+        persistenceManager.save(data)
         myData.append(data)
         myData = myData.sortedByDate
         reloadData()
