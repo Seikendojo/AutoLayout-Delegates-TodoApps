@@ -68,7 +68,6 @@ extension TodosViewController {
             persistenceManager.delete(todoToDelete)
 
             tableView.deleteRows(at: [indexPath], with: .fade)
-            reloadData()
         }
     }
 

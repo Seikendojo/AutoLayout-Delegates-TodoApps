@@ -22,8 +22,8 @@ class TodoTableViewCell: UITableViewCell {
                 todoTextLabel.attributedText = todo.title.strikeThrough
                 timeLabel.attributedText = todo.date.shortDateString.strikeThrough
             } else {
-                todoTextLabel.text = todo.title
-                timeLabel.text = todo.date.shortDateString
+                todoTextLabel.attributedText = todo.title.strikeThroughRemoved
+                timeLabel.attributedText = todo.date.shortDateString.strikeThroughRemoved
             }
             priorityLabel.text = todo.priority.symbol
             priorityLabel.textColor = todo.priority.color
