@@ -7,15 +7,22 @@
 
 import UIKit
 
+protocol InputFormDelegate: AnyObject {
+    func updateName(_ name: String)
+}
+
 class InputViewContrller: UIViewController {
+    
+    weak var delegate: InputFormDelegate?
+    
     @IBOutlet weak var nameTextfield: UITextField!
     @IBOutlet weak var saveButton: UIButton!
 
-    var onSaveTap: ((String) -> Void)?
+   
 
     @IBAction func onSaveTap(_ sender: UIButton) {
         guard let name = nameTextfield.text, !name.isEmpty else { return }
-        onSaveTap?(name)
+        delegate?.updateName(name)
         dismiss(animated: true)
     }
 }
