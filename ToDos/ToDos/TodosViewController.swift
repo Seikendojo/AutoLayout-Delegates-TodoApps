@@ -10,7 +10,9 @@ import UIKit
 class TodosViewController: UITableViewController {
 
     private let persistenceManager = PersistencManager()
-    private var myData = [Todo]()
+    private var myData: [Todo] {
+        persistenceManager.retrieveTodos().sortedByDate
+    }
 
     @IBOutlet var nothingTodoLabel: UILabel!
 
@@ -19,8 +21,6 @@ class TodosViewController: UITableViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.allowsSelection = false
-
-        myData = persistenceManager.retrieveTodos().sortedByDate
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -63,31 +63,31 @@ extension TodosViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let todoToDelete = myData[indexPath.row]
-            myData.remove(at: indexPath.row)
-
             persistenceManager.delete(todoToDelete)
-
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
 
     //Leading action to strikethrough the todo text
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        var todoToUpdate = myData[indexPath.row]
+        let title = todoToUpdate.isCompleted ? "Undo" : "Done"
+        let backgroundColor = todoToUpdate.isCompleted ? UIColor.todoYellow : UIColor.todoGreen
 
-        let doneAction = UIContextualAction(style: .normal, title: "Done") { [weak self] (action, sourceView, completionHandler) in
-            guard let self = self else { return }
-            var todoToUpdate = self.myData[indexPath.row]
-            todoToUpdate.isCompleted = true
+        let doneAction = UIContextualAction(style: .normal, title: title) { [weak self] (action, sourceView, completionHandler) in
+            todoToUpdate.isCompleted.toggle()
             let cell = tableView.cellForRow(at: indexPath) as! TodoTableViewCell
             cell.updateCell(with: todoToUpdate)
-
-            self.persistenceManager.save(todoToUpdate)
-
+            self?.persistenceManager.save(todoToUpdate)
             completionHandler(true)
         }
-
-        doneAction.backgroundColor = UIColor.todoGreen
+        doneAction.backgroundColor = backgroundColor
         return UISwipeActionsConfiguration(actions: [doneAction])
+    }
+
+    override func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
+        guard let indexPath = indexPath else { return }
+        tableView.reloadRows(at: [indexPath], with: .none)
     }
 }
 
@@ -95,8 +95,6 @@ extension TodosViewController {
 extension TodosViewController: AddInputDelegate {
     func addData(data: Todo) {
         persistenceManager.save(data)
-        myData.append(data)
-        myData = myData.sortedByDate
         reloadData()
     }
 

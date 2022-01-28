@@ -28,9 +28,8 @@ class TodoTableViewCell: UITableViewCell {
             priorityLabel.text = todo.priority.symbol
             priorityLabel.textColor = todo.priority.color
         } else {
-            todoTextLabel.text = .none
-            timeLabel.text = .none
-            priorityLabel.text = .none
+            todoTextLabel.attributedText = .none
+            timeLabel.attributedText = .none
         }
     }
 }
