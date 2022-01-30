@@ -8,12 +8,13 @@
 import UIKit
 
 protocol AddInputDelegate {
-    func addData(data: Todo)
+    func addData(data: TodoItems)
 }
 
 class TodoEntryViewController: UIViewController {
-
+   
     var delegate: AddInputDelegate?
+    let context = (UIApplication.shared.delegate as!AppDelegate).persistentContainer.viewContext
 
     @IBOutlet var whatToDoTextFeild: UITextField!
     @IBOutlet var dateTextFeild: UITextField!
@@ -79,9 +80,11 @@ class TodoEntryViewController: UIViewController {
     }
 
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
-        guard let todoTask = whatToDoTextFeild.text, !todoTask.isEmpty,
-                let priority = Priority(rawValue: priorityControl.selectedSegmentIndex) else { return }
-        let todo = Todo(title: todoTask, date: datePicker.date, priority: priority)
+        let title = whatToDoTextFeild.text
+        let date = datePicker.date
+        let vc = AddNewTaskViewModel(title: title ?? "", date: date, priority: Priority(rawValue: priorityControl.selectedSegmentIndex) ?? .low)
+        vc.saveTask()
+       let todo = TodoItems(context: context)
         delegate?.addData(data: todo)
         dismiss(animated: true)
     }
