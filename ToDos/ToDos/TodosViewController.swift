@@ -10,8 +10,8 @@ import UIKit
 class TodosViewController: UITableViewController {
 
     private let persistenceManager = PersistencManager()
-    private var myData: [TodoItems] {
-        persistenceManager.retrieveTodos().sortedByDate
+    private var myData: [Todo] {
+        persistenceManager.todos.sortedByDate
     }
 
     @IBOutlet var nothingTodoLabel: UILabel!
@@ -65,12 +65,13 @@ extension TodosViewController {
             let todoToDelete = myData[indexPath.row]
             persistenceManager.delete(todoToDelete)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            reloadData()
         }
     }
 
     //Leading action to strikethrough the todo text
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let todoToUpdate = myData[indexPath.row]
+        var todoToUpdate = myData[indexPath.row]
         let title = todoToUpdate.isCompleted ? "Undo" : "Done"
         let backgroundColor = todoToUpdate.isCompleted ? UIColor.todoYellow : UIColor.todoGreen
 
@@ -78,10 +79,7 @@ extension TodosViewController {
             todoToUpdate.isCompleted.toggle()
             let cell = tableView.cellForRow(at: indexPath) as! TodoTableViewCell
             cell.updateCell(with: todoToUpdate)
-            let title = todoToUpdate.title
-            let date = todoToUpdate.date
-            let priority = todoToUpdate.priority
-            self?.persistenceManager.save(title: title! , date: date!, priority: priority)
+            self?.persistenceManager.save(todo: todoToUpdate)
             completionHandler(true)
         }
         doneAction.backgroundColor = backgroundColor
@@ -96,12 +94,8 @@ extension TodosViewController {
 
 //MARK: Compfort Delegate
 extension TodosViewController: AddInputDelegate {
-    func addData(data: TodoItems) {
-        let data = TodoItems(context: persistenceManager.persistentContainer.viewContext)
-        guard let title = data.title,
-              let date = data.date else { return }
-        let priority = data.priority
-        persistenceManager.save(title: title, date: date, priority: priority)
+    func add(todo: Todo) {
+        persistenceManager.save(todo: todo)
         reloadData()
     }
 

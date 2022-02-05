@@ -16,14 +16,14 @@ class TodoTableViewCell: UITableViewCell {
         updateCell(with: .none)
     }
 
-    func updateCell(with todo: TodoItems?) {
+    func updateCell(with todo: Todo?) {
         if let todo = todo {
             if todo.isCompleted {
-                todoTextLabel.attributedText = todo.title?.strikeThrough
-                timeLabel.attributedText = todo.date?.shortDateString.strikeThrough
+                todoTextLabel.attributedText = todo.title.strikeThrough
+                timeLabel.attributedText = todo.date.shortDateString.strikeThrough
             } else {
-                todoTextLabel.attributedText = todo.title?.strikeThroughRemoved
-                timeLabel.attributedText = todo.date?.shortDateString.strikeThroughRemoved
+                todoTextLabel.attributedText = todo.title.strikeThroughRemoved
+                timeLabel.attributedText = todo.date.shortDateString.strikeThroughRemoved
             }
             priorityLabel.text = todo.priority.symbol
             priorityLabel.textColor = todo.priority.color

@@ -7,8 +7,8 @@
 
 import Foundation
 
-extension Array where Element == TodoItems {
-    var sortedByDate: [TodoItems] {
-        sorted(by: { $0.date!.compare($1.date!) == .orderedAscending })
+extension Array where Element == Todo {
+    var sortedByDate: [Todo] {
+        sorted(by: { $0.date.compare($1.date) == .orderedAscending })
     }
 }
