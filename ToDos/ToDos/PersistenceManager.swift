@@ -6,34 +6,99 @@
 //
 
 import Foundation
+import CoreData
+import UIKit
 
 struct PersistencManager {
+    static let shared = PersistencManager()
 
-    private var todosDict: [String: Any]? {
-        UserDefaults.standard.value(forKey: "todos") as? [String: Any]
+    private var todoModels: [TodoModel] {
+        let request = TodoModel.fetchRequest()
+        let todoModels = try? persistentContainer.viewContext.fetch(request)
+        return todoModels ?? [TodoModel]()
     }
 
-    func retrieveTodos() -> [Todo] {
+    var todos: [Todo] {
         var todos = [Todo]()
-        if let retrievedTodos = todosDict {
-            retrievedTodos.values.forEach { todoDict in
-                if let todo = Todo.parse(from: todoDict as! [String : Any]) {
-                    todos.append(todo)
-                }
-            }
-        }
+        todoModels.forEach({ todos.append(Todo.parse(from: $0)) })
         return todos
     }
 
-    func save(_ todo: Todo) {
-        var todosDict = todosDict ?? [String: Any]()
-        todosDict[todo.id] = todo.dictionary
-        UserDefaults.standard.set(todosDict, forKey: "todos")
+    var todosDict: [String: [Todo]] {
+        var dict = [String: [Todo]]()
+        dict[Section.todo.title] = todos.filter({ !$0.isCompleted }).sortedByDate
+        dict[Section.done.title] = todos.filter({ $0.isCompleted }).sortedByDate
+        return dict
+    }
+
+    func save(todo: Todo) {
+        if todos.contains(where: { $0.id == todo.id }) {
+            let request = TodoModel.fetchRequest()
+            request.predicate = NSPredicate(format: "id = %@", todo.id)
+
+            do {
+                let context = persistentContainer.viewContext
+                let result = try context.fetch(request)
+                if result.count > 0 {
+                    var todoModel = result.first!
+                    todoModel = todo.update(&todoModel)
+                }
+            } catch let error as NSError {
+                print("Could not fetch. \(error) \(error.userInfo) ")
+            }
+        } else {
+            let todoModel = TodoModel(context: persistentContainer.viewContext)
+            todoModel.id = todo.id
+            todoModel.title = todo.title
+            todoModel.date = todo.date
+            todoModel.priority = todo.priority
+            todoModel.isCompleted = todo.isCompleted
+        }
+        saveContext()
     }
 
     func delete(_ todo: Todo) {
-        var todosDict = self.todosDict
-        todosDict?.removeValue(forKey: todo.id)
-        UserDefaults.standard.set(todosDict, forKey: "todos")
+        let request = TodoModel.fetchRequest()
+        request.predicate = NSPredicate(format: "id = %@", todo.id)
+
+        do {
+            let context = persistentContainer.viewContext
+            let result = try context.fetch(request)
+            if result.count > 0 {
+                let todo = result.first!
+                context.delete(todo)
+                saveContext()
+            }
+        } catch let error as NSError {
+            print("Could not fetch. \(error) \(error.userInfo) ")
+        }
+    }
+
+    // MARK: - Core Data stack
+
+     var persistentContainer: NSPersistentContainer = {
+
+        let container = NSPersistentContainer(name: "TodoModel")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+
+    // MARK: - Core Data Saving support
+
+    private func saveContext () {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+              
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
     }
 }

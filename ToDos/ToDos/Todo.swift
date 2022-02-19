@@ -36,21 +36,21 @@ struct Todo {
     let priority: Priority
     var isCompleted = false
 
-    var dictionary: [String: Any] {
-        ["id": id,
-         "title": title,
-         "date": date,
-         "priority": priority.rawValue,
-         "isCompleted": isCompleted]
+    func update(_ todoModel: inout TodoModel) -> TodoModel {
+        todoModel.title = title
+        todoModel.date = date
+        todoModel.priority = priority
+        todoModel.id = id
+        todoModel.isCompleted = isCompleted
+        return todoModel
     }
 
-    static func parse(from dict: [String: Any]) -> Todo? {
-        guard let id = dict["id"] as? String,
-              let title = dict["title"] as? String,
-              let date = dict["date"] as? Date,
-              let priority = Priority(rawValue: dict["priority"] as? Int ?? 0),
-              let isCompleted = dict["isCompleted"] as? Bool
-        else { return nil }
-        return Todo(id: id, title: title, date: date, priority: priority, isCompleted: isCompleted)
+    static func parse(from todoModel: TodoModel) -> Todo {
+        Todo(id: todoModel.id,
+             title: todoModel.title,
+             date: todoModel.date,
+             priority: todoModel.priority,
+             isCompleted: todoModel.isCompleted)
     }
 }
+
