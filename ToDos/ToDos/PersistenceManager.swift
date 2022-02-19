@@ -24,6 +24,13 @@ struct PersistencManager {
         return todos
     }
 
+    var todosDict: [String: [Todo]] {
+        var dict = [String: [Todo]]()
+        dict[Section.todo.title] = todos.filter({ !$0.isCompleted }).sortedByDate
+        dict[Section.done.title] = todos.filter({ $0.isCompleted }).sortedByDate
+        return dict
+    }
+
     func save(todo: Todo) {
         if todos.contains(where: { $0.id == todo.id }) {
             let request = TodoModel.fetchRequest()
