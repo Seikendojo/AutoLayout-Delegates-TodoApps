@@ -7,14 +7,13 @@
 
 import UIKit
 
-var todoStore = TodoStore()
-
 class TodosViewController: UITableViewController {
+
     private let persistenceManager = PersistencManager()
     private var myData: [Todo] {
         persistenceManager.todos.sortedByDate
     }
-    
+
     @IBOutlet var nothingTodoLabel: UILabel!
 
     override func viewDidLoad() {
@@ -45,17 +44,8 @@ class TodosViewController: UITableViewController {
 
 // MARK: - DataSource
 extension TodosViewController {
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return todoStore.allTodos.count
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "To-do" : "Done"
-    }
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return todoStore.allTodos[section].count
+        return myData.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

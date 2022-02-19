@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1307E6DB27701026000AA6FD /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1307E6D927701026000AA6FD /* TodoTableViewCell.swift */; };
-		134D620B27BED28800F581DE /* TodoStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 134D620A27BED28700F581DE /* TodoStore.swift */; };
 		13B1F93A27A52A6200A19FC4 /* TodoModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 13B1F93827A52A6200A19FC4 /* TodoModel.xcdatamodeld */; };
 		13B1F94127A52BB300A19FC4 /* TodoModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1F93F27A52BB300A19FC4 /* TodoModel+CoreDataClass.swift */; };
 		13B1F94227A52BB300A19FC4 /* TodoModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1F94027A52BB300A19FC4 /* TodoModel+CoreDataProperties.swift */; };
@@ -30,7 +29,6 @@
 
 /* Begin PBXFileReference section */
 		1307E6D927701026000AA6FD /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
-		134D620A27BED28700F581DE /* TodoStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoStore.swift; sourceTree = "<group>"; };
 		13B1F93927A52A6200A19FC4 /* TodoModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TodoModel.xcdatamodel; sourceTree = "<group>"; };
 		13B1F93F27A52BB300A19FC4 /* TodoModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoModel+CoreDataClass.swift"; sourceTree = "<group>"; };
 		13B1F94027A52BB300A19FC4 /* TodoModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -97,7 +95,6 @@
 				EBB18C6E276BB6FE00483345 /* AppDelegate.swift */,
 				EBB18C70276BB6FE00483345 /* SceneDelegate.swift */,
 				EB5C4BF9277ADB140060255D /* Todo.swift */,
-				134D620A27BED28700F581DE /* TodoStore.swift */,
 				EB5C4BFD277AE8B60060255D /* Extensions */,
 				EB7F2027276E8ECC00315C49 /* TodosViewController.swift */,
 				13D23F27276EB59100869EBC /* TodoEntryViewController.swift */,
@@ -198,7 +195,6 @@
 				EB5C4C01278567C50060255D /* UITextField+Extensions.swift in Sources */,
 				EB7F2028276E8ECC00315C49 /* TodosViewController.swift in Sources */,
 				EBAAF0462795F192002FBFF5 /* PersistenceManager.swift in Sources */,
-				134D620B27BED28800F581DE /* TodoStore.swift in Sources */,
 				13B1F94127A52BB300A19FC4 /* TodoModel+CoreDataClass.swift in Sources */,
 				EBB18C71276BB6FE00483345 /* SceneDelegate.swift in Sources */,
 			);
