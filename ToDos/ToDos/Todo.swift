@@ -31,9 +31,9 @@ enum Priority: Int {
 
 struct Todo {
     var id = UUID().uuidString
-    let title: String
-    let date: Date
-    let priority: Priority
+    var title: String
+    var date: Date
+    var priority: Priority
     var isCompleted = false
 
     func update(_ todoModel: inout TodoModel) -> TodoModel {

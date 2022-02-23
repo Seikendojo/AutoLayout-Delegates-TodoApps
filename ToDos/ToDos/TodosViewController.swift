@@ -24,7 +24,6 @@ class TodosViewController: UITableViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.allowsSelection = false
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -42,6 +41,13 @@ class TodosViewController: UITableViewController {
             let navController = segue.destination as? UINavigationController
             let todoEntryVC = navController?.viewControllers.first as? TodoEntryViewController
             todoEntryVC?.delegate = self
+        } else if segue.identifier == "EditTodoItem" {
+            let controller = segue.destination as? TodoEntryViewController
+            controller?.delegate = self
+            if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
+                let section = Section(rawValue: indexPath.section)
+                controller?.todoToEdit = myDataDict[section!.title]![indexPath.row]
+            }
         }
     }
 }
@@ -77,7 +83,8 @@ extension TodosViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let todoToDelete = myData[indexPath.row]
+            guard let todoSection = Section(rawValue: indexPath.section),
+            let todoToDelete = myDataDict[todoSection.title]?[indexPath.row] else { return }
             persistenceManager.delete(todoToDelete)
             tableView.deleteRows(at: [indexPath], with: .fade)
             reloadData()
@@ -109,6 +116,13 @@ extension TodosViewController {
 
 //MARK: Compfort Delegate
 extension TodosViewController: AddInputDelegate {
+    
+    func edit(todo: Todo) {
+        persistenceManager.save(todo: todo)
+        reloadData()
+        navigationController?.popViewController(animated: true)
+    }
+    
     func add(todo: Todo) {
         persistenceManager.save(todo: todo)
         reloadData()

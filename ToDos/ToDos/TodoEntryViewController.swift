@@ -9,12 +9,14 @@ import UIKit
 
 protocol AddInputDelegate {
     func add(todo: Todo)
+    func edit(todo: Todo)
 }
 
 class TodoEntryViewController: UIViewController {
    
     var delegate: AddInputDelegate?
     let context = (UIApplication.shared.delegate as!AppDelegate).persistentContainer.viewContext
+    var todoToEdit: Todo?
 
     @IBOutlet var whatToDoTextFeild: UITextField!
     @IBOutlet var dateTextFeild: UITextField!
@@ -28,6 +30,7 @@ class TodoEntryViewController: UIViewController {
         configDateTextField()
         stylePriorityControl()
         configTapGesture()
+        configTodoEdit()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -73,21 +76,40 @@ class TodoEntryViewController: UIViewController {
 
     @IBAction func configureSegment(_ sender: UISegmentedControl) {
         let selectedIndex = priorityControl.isSelected
-
         if !selectedIndex {
             priorityControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: UIControl.State.selected)
         }
     }
+    
+    func configTodoEdit() {
+        if let todo = todoToEdit {
+            title = "Edit Item"
+            whatToDoTextFeild.text = todo.title
+            dateTextFeild.text = todo.date.shortDateString
+            priorityControl.selectedSegmentIndex = todo.priority.rawValue
+        }
+    }
 
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
-        guard let title = whatToDoTextFeild.text else { return }
-        let date = datePicker.date
-        let priority = Priority(rawValue: priorityControl.selectedSegmentIndex) ?? .low
-        delegate?.add(todo: .init(title: title, date: date, priority: priority))
-        dismiss(animated: true)
+        if var todoToEdit = todoToEdit {
+            todoToEdit.title = whatToDoTextFeild.text!
+            //todoToEdit.priority.rawValue = priorityControl.selectedSegmentIndex
+            todoToEdit.date = datePicker.date
+            delegate?.edit(todo: todoToEdit)
+            dismiss(animated: true)
+           
+        } else {
+            guard let title = whatToDoTextFeild.text else { return }
+            let date = datePicker.date
+            let priority = Priority(rawValue: priorityControl.selectedSegmentIndex) ?? .low
+            delegate?.add(todo: .init(title: title, date: date, priority: priority))
+            dismiss(animated: true)
+        }
     }
 
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
+        
     }
 }
