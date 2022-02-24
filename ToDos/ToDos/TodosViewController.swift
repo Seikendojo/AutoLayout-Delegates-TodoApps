@@ -42,6 +42,9 @@ class TodosViewController: UITableViewController {
             let navController = segue.destination as? UINavigationController
             let todoEntryVC = navController?.viewControllers.first as? TodoEntryViewController
             todoEntryVC?.delegate = self
+            guard let indexPath = sender as? IndexPath else { return }
+            let section = Section(rawValue: indexPath.section)!
+            todoEntryVC?.todoToEdit = myDataDict[section.title]?[indexPath.row]
         }
     }
 }
@@ -77,7 +80,8 @@ extension TodosViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let todoToDelete = myData[indexPath.row]
+            guard let todoSection = Section(rawValue: indexPath.section),
+            let todoToDelete = myDataDict[todoSection.title]?[indexPath.row] else { return }
             persistenceManager.delete(todoToDelete)
             tableView.deleteRows(at: [indexPath], with: .fade)
             reloadData()
@@ -98,17 +102,35 @@ extension TodosViewController {
             self?.persistenceManager.save(todo: todoToUpdate)
             completionHandler(true)
         }
+
+        let editAction = UIContextualAction(style: .normal, title: "Edit") { [weak self] (action, view, completionHandler) in
+            self?.performSegue(withIdentifier: "showTodoEntry", sender: indexPath)
+            completionHandler(true)
+        }
         doneAction.backgroundColor = backgroundColor
-        return UISwipeActionsConfiguration(actions: [doneAction])
+        editAction.backgroundColor = .todoBlue
+        return UISwipeActionsConfiguration(actions: [doneAction, editAction])
     }
 
     override func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
         tableView.reloadData()
     }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showTodoEntry", sender: nil)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 //MARK: Compfort Delegate
 extension TodosViewController: AddInputDelegate {
+    
+    func edit(todo: Todo) {
+        persistenceManager.save(todo: todo)
+        reloadData()
+        navigationController?.popViewController(animated: true)
+    }
+    
     func add(todo: Todo) {
         persistenceManager.save(todo: todo)
         reloadData()
