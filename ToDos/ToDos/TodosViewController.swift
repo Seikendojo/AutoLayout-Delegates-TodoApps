@@ -24,6 +24,7 @@ class TodosViewController: UITableViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.allowsSelection = false
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -41,13 +42,9 @@ class TodosViewController: UITableViewController {
             let navController = segue.destination as? UINavigationController
             let todoEntryVC = navController?.viewControllers.first as? TodoEntryViewController
             todoEntryVC?.delegate = self
-        } else if segue.identifier == "EditTodoItem" {
-            let controller = segue.destination as? TodoEntryViewController
-            controller?.delegate = self
-            if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
-                let section = Section(rawValue: indexPath.section)
-                controller?.todoToEdit = myDataDict[section!.title]![indexPath.row]
-            }
+            guard let indexPath = sender as? IndexPath else { return }
+            let section = Section(rawValue: indexPath.section)!
+            todoEntryVC?.todoToEdit = myDataDict[section.title]?[indexPath.row]
         }
     }
 }
@@ -105,12 +102,23 @@ extension TodosViewController {
             self?.persistenceManager.save(todo: todoToUpdate)
             completionHandler(true)
         }
+
+        let editAction = UIContextualAction(style: .normal, title: "Edit") { [weak self] (action, view, completionHandler) in
+            self?.performSegue(withIdentifier: "showTodoEntry", sender: indexPath)
+            completionHandler(true)
+        }
         doneAction.backgroundColor = backgroundColor
-        return UISwipeActionsConfiguration(actions: [doneAction])
+        editAction.backgroundColor = .todoBlue
+        return UISwipeActionsConfiguration(actions: [doneAction, editAction])
     }
 
     override func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
         tableView.reloadData()
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showTodoEntry", sender: nil)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
