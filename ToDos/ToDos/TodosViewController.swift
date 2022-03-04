@@ -147,8 +147,8 @@ enum Section: Int {
 
     var title: String {
         switch self {
-        case .todo: return "To do"
-        case .done: return "Done"
+        case .todo: return "To Complete"
+        case .done: return "Completed"
         }
     }
 }
