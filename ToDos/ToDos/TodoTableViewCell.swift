@@ -11,13 +11,15 @@ class TodoTableViewCell: UITableViewCell {
     @IBOutlet private var todoTextLabel: UILabel!
     @IBOutlet private var timeLabel: UILabel!
     @IBOutlet private var priorityLabel: UILabel!
-
+    @IBOutlet var personImageView: UIImageView!
+    
     override func prepareForReuse() {
         updateCell(with: .none)
     }
 
     func updateCell(with todo: Todo?) {
         if let todo = todo {
+            personImageView.makeRounded()
             if todo.isCompleted {
                 todoTextLabel.attributedText = todo.title.strikeThrough
                 timeLabel.attributedText = todo.date.shortDateString.strikeThrough
