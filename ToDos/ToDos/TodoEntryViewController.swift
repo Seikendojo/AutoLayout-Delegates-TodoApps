@@ -14,6 +14,10 @@ protocol AddInputDelegate {
 
 class TodoEntryViewController: UIViewController {
    
+    @IBOutlet var personPhotoButton: UIButton!
+    
+   // var imageName = ""
+    
     var delegate: AddInputDelegate?
     let context = (UIApplication.shared.delegate as!AppDelegate).persistentContainer.viewContext
     var todoToEdit: Todo?
@@ -26,7 +30,9 @@ class TodoEntryViewController: UIViewController {
     private var datePicker = UIDatePicker()
 
     override func viewDidLoad() {
+       // personPhotoButton.imageView?.image = UIImage(named: imageName)
         super.viewDidLoad()
+        configPersonButton()
         configDateTextField()
         stylePriorityControl()
         configTapGesture()
@@ -36,6 +42,7 @@ class TodoEntryViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         whatToDoTextFeild.becomeFirstResponder()
+        personPhotoButton.imageView?.contentMode = UIView.ContentMode.scaleToFill
     }
 
     private func configTapGesture() {
@@ -73,6 +80,14 @@ class TodoEntryViewController: UIViewController {
             datePicker = datePickerView
         }
     }
+    
+    func configPersonButton(){
+        personPhotoButton.layer.cornerRadius = personPhotoButton.frame.width / 2
+        personPhotoButton.layer.borderWidth = 2
+        personPhotoButton.layer.masksToBounds = false
+        personPhotoButton.layer.borderColor = UIColor.darkGray.cgColor
+        personPhotoButton.clipsToBounds = true
+    }
 
     @IBAction func configureSegment(_ sender: UISegmentedControl) {
         let selectedIndex = priorityControl.isSelected
@@ -107,9 +122,29 @@ class TodoEntryViewController: UIViewController {
         }
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToPopup" {
+            let destinationVC = segue.destination as? OwnerPopupViewController
+            destinationVC?.photoSelectionDelegate = self
+        }
+    }
+    
+    
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
         navigationController?.popViewController(animated: true)
-        
+    }
+    
+    @IBAction func personPhotoBtnTapped(_ sender: UIButton) {
+//        let selectionVC = storyboard?.instantiateViewController(withIdentifier: "goToPopup") as! OwnerPopupViewController
+//        selectionVC.photoSelectionDelegate = self
+//        present(selectionVC, animated: true)
+    }
+}
+
+extension TodoEntryViewController: ownerPhotoSelectionDelegate {
+    func didTapChoice(image: UIImage) {
+        personPhotoButton.setImage(image, for: .normal)
+        personPhotoButton.setTitle("", for: .normal)
     }
 }

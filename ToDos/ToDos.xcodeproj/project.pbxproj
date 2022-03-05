@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1302B8A627D28A38008E1055 /* OwnerPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1302B8A527D28A38008E1055 /* OwnerPopupViewController.swift */; };
+		1302B8A827D2A27B008E1055 /* OwnerPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1302B8A727D2A27B008E1055 /* OwnerPhotoCollectionViewCell.swift */; };
 		1307E6DB27701026000AA6FD /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1307E6D927701026000AA6FD /* TodoTableViewCell.swift */; };
 		13B1F93A27A52A6200A19FC4 /* TodoModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 13B1F93827A52A6200A19FC4 /* TodoModel.xcdatamodeld */; };
 		13B1F94127A52BB300A19FC4 /* TodoModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1F93F27A52BB300A19FC4 /* TodoModel+CoreDataClass.swift */; };
@@ -29,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1302B8A527D28A38008E1055 /* OwnerPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerPopupViewController.swift; sourceTree = "<group>"; };
+		1302B8A727D2A27B008E1055 /* OwnerPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		1307E6D927701026000AA6FD /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
 		13B1F93927A52A6200A19FC4 /* TodoModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TodoModel.xcdatamodel; sourceTree = "<group>"; };
 		13B1F93F27A52BB300A19FC4 /* TodoModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoModel+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -102,6 +106,8 @@
 				EB7F2027276E8ECC00315C49 /* TodosViewController.swift */,
 				13D23F27276EB59100869EBC /* TodoEntryViewController.swift */,
 				1307E6D927701026000AA6FD /* TodoTableViewCell.swift */,
+				1302B8A527D28A38008E1055 /* OwnerPopupViewController.swift */,
+				1302B8A727D2A27B008E1055 /* OwnerPhotoCollectionViewCell.swift */,
 				EBB18C74276BB6FE00483345 /* Main.storyboard */,
 				EBB18C77276BB6FF00483345 /* Assets.xcassets */,
 				EBB18C79276BB6FF00483345 /* LaunchScreen.storyboard */,
@@ -198,7 +204,9 @@
 				EB5C4C01278567C50060255D /* UITextField+Extensions.swift in Sources */,
 				EB7F2028276E8ECC00315C49 /* TodosViewController.swift in Sources */,
 				EBAAF0462795F192002FBFF5 /* PersistenceManager.swift in Sources */,
+				1302B8A627D28A38008E1055 /* OwnerPopupViewController.swift in Sources */,
 				13B1F94127A52BB300A19FC4 /* TodoModel+CoreDataClass.swift in Sources */,
+				1302B8A827D2A27B008E1055 /* OwnerPhotoCollectionViewCell.swift in Sources */,
 				EBB18C71276BB6FE00483345 /* SceneDelegate.swift in Sources */,
 				13BC19C627D138EA0037E146 /* UIImage+Extensions.swift in Sources */,
 			);
