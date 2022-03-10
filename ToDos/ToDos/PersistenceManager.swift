@@ -24,6 +24,9 @@ struct PersistencManager {
         return todos
     }
 
+    // var people: [Person] {
+//     }
+
     var todosDict: [String: [Todo]] {
         var dict = [String: [Todo]]()
         dict[Section.todo.title] = todos.filter({ !$0.isCompleted }).sortedByDate
