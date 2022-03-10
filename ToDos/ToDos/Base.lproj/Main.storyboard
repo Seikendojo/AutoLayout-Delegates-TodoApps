@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3Iy-ws-q7O">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3Iy-ws-q7O">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -181,9 +181,6 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Add Owner"/>
                                 <connections>
                                     <action selector="personPhotoBtnTapped:" destination="QA5-UA-5c8" eventType="touchUpInside" id="nRo-ES-gWL"/>
-                                    <segue destination="KjF-y9-Mwc" kind="popoverPresentation" identifier="goToPopup" popoverAnchorView="bLr-K5-ucL" id="9J5-Ad-83m">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES"/>
-                                    </segue>
                                 </connections>
                             </button>
                         </subviews>
@@ -231,6 +228,9 @@
                         <outlet property="priorityControl" destination="GWP-d0-XX6" id="X2W-y9-Iux"/>
                         <outlet property="saveBarButton" destination="xEG-4R-cvK" id="fwr-KL-OGa"/>
                         <outlet property="whatToDoTextFeild" destination="Ral-Yh-bNM" id="3qX-1y-jtS"/>
+                        <segue destination="KjF-y9-Mwc" kind="popoverPresentation" identifier="goToPopup" popoverAnchorView="bLr-K5-ucL" id="Ap9-yz-w5c">
+                            <popoverArrowDirection key="popoverArrowDirection" down="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JBT-JW-NgI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -242,11 +242,11 @@
             <objects>
                 <viewController storyboardIdentifier="goToPopup" id="KjF-y9-Mwc" customClass="OwnerPopupViewController" customModule="ToDos" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="42s-Gd-RRo">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="350" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="l8T-kk-q5D">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
+                                <rect key="frame" x="0.0" y="0.0" width="350" height="200"/>
                                 <color key="backgroundColor" systemColor="systemGray3Color"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VRj-1j-VGI">
                                     <size key="itemSize" width="50" height="50"/>
@@ -265,6 +265,8 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bruce" translatesAutoresizingMaskIntoConstraints="NO" id="e4H-ck-upA">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" systemColor="labelColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="4bR-WL-ZcY"/>
                                                         <constraint firstAttribute="height" constant="50" id="H66-2b-pFO"/>
@@ -280,6 +282,33 @@
                                         <size key="customSize" width="50" height="50"/>
                                         <connections>
                                             <outlet property="ownerImageView" destination="e4H-ck-upA" id="WPZ-kI-Un9"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="newOwnerCell" id="eQY-r5-9WC">
+                                        <rect key="frame" x="80" y="10" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="oj8-aG-DHX">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addNewOwner" translatesAutoresizingMaskIntoConstraints="NO" id="LuI-6d-Qzv">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="Ywi-tp-1up"/>
+                                                        <constraint firstAttribute="width" constant="50" id="svg-xV-in4"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="LuI-6d-Qzv" firstAttribute="centerY" secondItem="oj8-aG-DHX" secondAttribute="centerY" id="7cd-k6-YpW"/>
+                                                <constraint firstItem="LuI-6d-Qzv" firstAttribute="centerX" secondItem="oj8-aG-DHX" secondAttribute="centerX" id="tXK-2y-0x0"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" systemColor="labelColor"/>
+                                        <size key="customSize" width="50" height="50"/>
+                                        <connections>
+                                            <outlet property="ownerImageView" destination="LuI-6d-Qzv" id="tej-AX-Nby"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -300,7 +329,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="UpL-z2-ZGB"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="414" height="300"/>
+                    <size key="freeformSize" width="350" height="200"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zhh-Bm-OgO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -350,6 +379,10 @@
     </scenes>
     <resources>
         <image name="Bruce" width="225" height="225"/>
+        <image name="addNewOwner" width="100" height="100"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -12,7 +12,7 @@ protocol AddInputDelegate {
     func edit(todo: Todo)
 }
 
-class TodoEntryViewController: UIViewController {
+class TodoEntryViewController: UIViewController, UIPopoverPresentationControllerDelegate {
    
     @IBOutlet var personPhotoButton: UIButton!
     
@@ -126,6 +126,9 @@ class TodoEntryViewController: UIViewController {
         if segue.identifier == "goToPopup" {
             let destinationVC = segue.destination as? OwnerPopupViewController
             destinationVC?.photoSelectionDelegate = self
+            destinationVC?.popoverPresentationController?.permittedArrowDirections = .down
+            destinationVC?.popoverPresentationController?.backgroundColor = .lightGray
+            destinationVC?.popoverPresentationController?.delegate = self
         }
     }
     
@@ -136,9 +139,7 @@ class TodoEntryViewController: UIViewController {
     }
     
     @IBAction func personPhotoBtnTapped(_ sender: UIButton) {
-//        let selectionVC = storyboard?.instantiateViewController(withIdentifier: "goToPopup") as! OwnerPopupViewController
-//        selectionVC.photoSelectionDelegate = self
-//        present(selectionVC, animated: true)
+        performSegue(withIdentifier: "goToPopup", sender: nil)
     }
 }
 
@@ -146,5 +147,11 @@ extension TodoEntryViewController: ownerPhotoSelectionDelegate {
     func didTapChoice(image: UIImage) {
         personPhotoButton.setImage(image, for: .normal)
         personPhotoButton.setTitle("", for: .normal)
+    }
+}
+
+extension TodoEntryViewController: UIAdaptivePresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
 }
