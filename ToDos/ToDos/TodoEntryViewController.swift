@@ -126,7 +126,6 @@ class TodoEntryViewController: UIViewController, UIPopoverPresentationController
         if segue.identifier == "goToPopup" {
             let destinationVC = segue.destination as? OwnerPopupViewController
             destinationVC?.photoSelectionDelegate = self
-            destinationVC?.popoverPresentationController?.permittedArrowDirections = .down
             destinationVC?.popoverPresentationController?.backgroundColor = .lightGray
             destinationVC?.popoverPresentationController?.delegate = self
         }
