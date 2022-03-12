@@ -12,3 +12,9 @@ extension Array where Element == Todo {
         sorted(by: { $0.date.compare($1.date) == .orderedAscending })
     }
 }
+
+extension Array where Element == Person {
+    var sortedLastName: [Person] {
+        sorted (by: { $0.lastName.compare($1.lastName) == .orderedAscending })
+    }
+}

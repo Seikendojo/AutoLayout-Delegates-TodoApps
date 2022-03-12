@@ -10,7 +10,5 @@ import UIKit
 
 
 class OwnerPhotoCollectionViewCell: UICollectionViewCell {
-    
     @IBOutlet var ownerImageView: UIImageView!
-    
 }
