@@ -24,8 +24,14 @@ struct PersistencManager {
         return todos
     }
 
-    // var people: [Person] {
-//     }
+     var people: [Person] {
+       var people = [Person]()
+         people.append(Person(firstName: "Bruce", lastName: "Lee", image: UIImage(named: "Bruce")!))
+         people.append(Person(firstName: "Halle", lastName: "Berry", image: UIImage(named: "HalleBerry")!))
+         people.append(Person(firstName: "Brad", lastName: "Pitt", image: UIImage(named: "BradPitt")!))
+         people.append(Person(firstName: "Arnold", lastName: "Schwarzenegerk", image: UIImage(named: "Arnold")!))
+         return people.sortedLastName
+     }
 
     var todosDict: [String: [Todo]] {
         var dict = [String: [Todo]]()
