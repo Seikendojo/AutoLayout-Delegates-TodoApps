@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zbp-pL-YV1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zbp-pL-YV1">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -351,9 +350,7 @@
         <scene sceneID="qFx-CV-Ukt">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LX4-dQ-9sO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Todos" image="checklist" catalog="system" id="jBe-yc-V8O">
-                        <imageReference key="selectedImage" image="checklist" catalog="system" symbolScale="medium"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Todos" image="todos-selected" id="jBe-yc-V8O"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="l36-zF-HlP">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -440,7 +437,11 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="People" id="K3O-6D-6Az">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="m2F-X1-uVh"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="m2F-X1-uVh">
+                            <connections>
+                                <segue destination="JEk-Va-5pC" kind="presentation" id="YDR-wq-TBG"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -452,13 +453,80 @@
             </objects>
             <point key="canvasLocation" x="7279.7101449275369" y="694.41964285714278"/>
         </scene>
+        <!--Owner Entry Form View Controller-->
+        <scene sceneID="yR0-nT-5NI">
+            <objects>
+                <viewController id="cEG-Ts-toO" customClass="OwnerEntryFormViewController" customModule="ToDos" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rkE-GM-ovp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WXE-Xb-LVx">
+                                <rect key="frame" x="36" y="521" width="342" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ks5-jc-9gk">
+                                <rect key="frame" x="36" y="661" width="342" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cao-BA-6EA">
+                                <rect key="frame" x="36" y="492" width="87" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FHX-tA-qYG">
+                                <rect key="frame" x="44" y="630" width="87" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="hAZ-5s-EF2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="FHX-tA-qYG" firstAttribute="leading" secondItem="hAZ-5s-EF2" secondAttribute="leading" constant="44" id="16V-qd-RmF"/>
+                            <constraint firstItem="cao-BA-6EA" firstAttribute="top" secondItem="hAZ-5s-EF2" secondAttribute="top" constant="436" id="7jk-an-6eW"/>
+                            <constraint firstItem="hAZ-5s-EF2" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FHX-tA-qYG" secondAttribute="trailing" symbolic="YES" id="8M4-ti-6b8"/>
+                            <constraint firstItem="WXE-Xb-LVx" firstAttribute="top" secondItem="cao-BA-6EA" secondAttribute="bottom" constant="8" symbolic="YES" id="Isj-nK-K7t"/>
+                            <constraint firstItem="ks5-jc-9gk" firstAttribute="top" secondItem="FHX-tA-qYG" secondAttribute="bottom" constant="10" id="KnZ-m0-SCG"/>
+                            <constraint firstItem="hAZ-5s-EF2" firstAttribute="trailing" secondItem="WXE-Xb-LVx" secondAttribute="trailing" constant="36" id="Oci-Rp-9jW"/>
+                            <constraint firstItem="ks5-jc-9gk" firstAttribute="leading" secondItem="hAZ-5s-EF2" secondAttribute="leading" constant="36" id="Om8-pC-zgI"/>
+                            <constraint firstItem="hAZ-5s-EF2" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cao-BA-6EA" secondAttribute="trailing" symbolic="YES" id="emv-Yc-Cr4"/>
+                            <constraint firstItem="WXE-Xb-LVx" firstAttribute="leading" secondItem="hAZ-5s-EF2" secondAttribute="leading" constant="36" id="hh1-vi-4cR"/>
+                            <constraint firstItem="FHX-tA-qYG" firstAttribute="top" secondItem="WXE-Xb-LVx" secondAttribute="bottom" constant="75" id="pdq-pd-mzI"/>
+                            <constraint firstItem="hAZ-5s-EF2" firstAttribute="trailing" secondItem="ks5-jc-9gk" secondAttribute="trailing" constant="36" id="r0C-Hq-DeV"/>
+                            <constraint firstItem="cao-BA-6EA" firstAttribute="leading" secondItem="hAZ-5s-EF2" secondAttribute="leading" constant="36" id="x4S-pM-Clz"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="sAq-SQ-XIg">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="iih-GO-Cqf">
+                            <connections>
+                                <action selector="cancelBarButtonTapped" destination="cEG-Ts-toO" id="b2B-7v-yiS"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="5X3-1C-UGw">
+                            <connections>
+                                <action selector="saveBarButtonTapped" destination="cEG-Ts-toO" id="Zth-9h-Zv9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="firstNameTxtField" destination="WXE-Xb-LVx" id="Xj9-iC-siq"/>
+                        <outlet property="lastNameTxtField" destination="ks5-jc-9gk" id="wWj-NR-V7K"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ffY-YN-fKQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8822" y="694"/>
+        </scene>
         <!--People-->
         <scene sceneID="5lz-Zc-pXt">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WxJ-Dm-fIc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="People" image="person.3.fill" catalog="system" id="09E-vj-fRh">
-                        <imageReference key="selectedImage" image="person.3.fill" catalog="system" symbolScale="medium"/>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="People" image="people-selected" id="09E-vj-fRh"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zTS-xH-1LH">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -473,11 +541,29 @@
             </objects>
             <point key="canvasLocation" x="6371" y="695"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="hhD-1G-OVn">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JEk-Va-5pC" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="33t-ol-IK8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="cEG-Ts-toO" kind="relationship" relationship="rootViewController" id="pXQ-iU-Q5E"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xye-Hh-x97" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8070" y="694"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Bruce" width="225" height="225"/>
-        <image name="checklist" catalog="system" width="128" height="105"/>
-        <image name="person.3.fill" catalog="system" width="128" height="61"/>
+        <image name="people-selected" width="23" height="23"/>
+        <image name="todos-selected" width="23" height="23"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
