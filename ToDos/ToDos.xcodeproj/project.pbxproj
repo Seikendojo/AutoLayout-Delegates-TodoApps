@@ -15,8 +15,8 @@
 		13B1F94227A52BB300A19FC4 /* TodoModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B1F94027A52BB300A19FC4 /* TodoModel+CoreDataProperties.swift */; };
 		13BC19C627D138EA0037E146 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BC19C527D138EA0037E146 /* UIImage+Extensions.swift */; };
 		13D23F28276EB59100869EBC /* TodoEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D23F27276EB59100869EBC /* TodoEntryViewController.swift */; };
-		D82E70A827DE8E7C006D887D /* OwnerEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82E70A727DE8E7C006D887D /* OwnerEntryViewController.swift */; };
-		D82E70AC27DEA8C8006D887D /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82E70AB27DEA8C8006D887D /* UIButton+Extensions.swift */; };
+		D821A6CD27E272D70020BD9E /* OwnerEntryFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821A6CC27E272D70020BD9E /* OwnerEntryFormViewController.swift */; };
+		D821A6CF27E274390020BD9E /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821A6CE27E274390020BD9E /* UIButton+Extensions.swift */; };
 		D8B9617927DBF8330053C729 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B9617827DBF8330053C729 /* Person.swift */; };
 		D8DE3C6827DA8E34001C6870 /* OwnersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DE3C6727DA8E34001C6870 /* OwnersTableViewController.swift */; };
 		D8DE3C6E27DA9007001C6870 /* OwnersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DE3C6D27DA9007001C6870 /* OwnersTableViewCell.swift */; };
@@ -44,8 +44,8 @@
 		13B1F94027A52BB300A19FC4 /* TodoModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		13BC19C527D138EA0037E146 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		13D23F27276EB59100869EBC /* TodoEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEntryViewController.swift; sourceTree = "<group>"; };
-		D82E70A727DE8E7C006D887D /* OwnerEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerEntryViewController.swift; sourceTree = "<group>"; };
-		D82E70AB27DEA8C8006D887D /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
+		D821A6CC27E272D70020BD9E /* OwnerEntryFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerEntryFormViewController.swift; sourceTree = "<group>"; };
+		D821A6CE27E274390020BD9E /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		D8B9617827DBF8330053C729 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		D8DE3C6727DA8E34001C6870 /* OwnersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnersTableViewController.swift; sourceTree = "<group>"; };
 		D8DE3C6927DA8FE4001C6870 /* ToDos-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ToDos-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -81,7 +81,7 @@
 		EB5C4BFD277AE8B60060255D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				D82E70AB27DEA8C8006D887D /* UIButton+Extensions.swift */,
+				D821A6CE27E274390020BD9E /* UIButton+Extensions.swift */,
 				EBAAF0472795FEC1002FBFF5 /* Array+Extensions.swift */,
 				EB5C4BFB277ADDA90060255D /* Date+Extensions.swift */,
 				EB202A2C2793570700DB1945 /* String+Extensions.swift */,
@@ -122,7 +122,7 @@
 				1302B8A527D28A38008E1055 /* OwnerPopupViewController.swift */,
 				1302B8A727D2A27B008E1055 /* OwnerPhotoCollectionViewCell.swift */,
 				D8DE3C6727DA8E34001C6870 /* OwnersTableViewController.swift */,
-				D82E70A727DE8E7C006D887D /* OwnerEntryViewController.swift */,
+				D821A6CC27E272D70020BD9E /* OwnerEntryFormViewController.swift */,
 				D8DE3C6D27DA9007001C6870 /* OwnersTableViewCell.swift */,
 				EBB18C74276BB6FE00483345 /* Main.storyboard */,
 				EBB18C77276BB6FF00483345 /* Assets.xcassets */,
@@ -210,7 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8DE3C6E27DA9007001C6870 /* OwnersTableViewCell.swift in Sources */,
-				D82E70AC27DEA8C8006D887D /* UIButton+Extensions.swift in Sources */,
+				D821A6CF27E274390020BD9E /* UIButton+Extensions.swift in Sources */,
 				EB202A2D2793570700DB1945 /* String+Extensions.swift in Sources */,
 				1307E6DB27701026000AA6FD /* TodoTableViewCell.swift in Sources */,
 				EB5C4BFA277ADB140060255D /* Todo.swift in Sources */,
@@ -225,11 +225,11 @@
 				EB7F2028276E8ECC00315C49 /* TodosViewController.swift in Sources */,
 				EBAAF0462795F192002FBFF5 /* PersistenceManager.swift in Sources */,
 				D8DE3C6827DA8E34001C6870 /* OwnersTableViewController.swift in Sources */,
-				D82E70A827DE8E7C006D887D /* OwnerEntryViewController.swift in Sources */,
 				1302B8A627D28A38008E1055 /* OwnerPopupViewController.swift in Sources */,
 				13B1F94127A52BB300A19FC4 /* TodoModel+CoreDataClass.swift in Sources */,
 				1302B8A827D2A27B008E1055 /* OwnerPhotoCollectionViewCell.swift in Sources */,
 				D8B9617927DBF8330053C729 /* Person.swift in Sources */,
+				D821A6CD27E272D70020BD9E /* OwnerEntryFormViewController.swift in Sources */,
 				EBB18C71276BB6FE00483345 /* SceneDelegate.swift in Sources */,
 				13BC19C627D138EA0037E146 /* UIImage+Extensions.swift in Sources */,
 			);
@@ -384,8 +384,6 @@
 				DEVELOPMENT_TEAM = DXCQ9WGD8Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ToDos/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs to get access to your camera.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs to get accesss to your photo library.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -397,7 +395,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.seikendojo1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.98chimp.ToDos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "ToDos/ToDos-Bridging-Header.h";
@@ -418,8 +416,6 @@
 				DEVELOPMENT_TEAM = DXCQ9WGD8Q;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ToDos/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs to get access to your camera.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs to get accesss to your photo library.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -431,7 +427,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.seikendojo1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.98chimp.ToDos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "ToDos/ToDos-Bridging-Header.h";
