@@ -108,7 +108,6 @@ class TodoEntryViewController: UIViewController, UIPopoverPresentationController
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         if var todoToEdit = todoToEdit {
             todoToEdit.title = whatToDoTextFeild.text!
-            //todoToEdit.priority.rawValue = priorityControl.selectedSegmentIndex
             todoToEdit.date = datePicker.date
             delegate?.edit(todo: todoToEdit)
             dismiss(animated: true)
