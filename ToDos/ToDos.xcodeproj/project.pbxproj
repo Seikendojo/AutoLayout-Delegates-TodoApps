@@ -26,6 +26,7 @@
 		EB5C4BFF277AE8CE0060255D /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5C4BFE277AE8CE0060255D /* UIColor+Extensions.swift */; };
 		EB5C4C01278567C50060255D /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB5C4C00278567C50060255D /* UITextField+Extensions.swift */; };
 		EB7F2028276E8ECC00315C49 /* TodosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F2027276E8ECC00315C49 /* TodosViewController.swift */; };
+		EB9B4C4627F0D6940037AEC0 /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9B4C4527F0D6940037AEC0 /* CircleImageView.swift */; };
 		EBAAF0462795F192002FBFF5 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAAF0452795F192002FBFF5 /* PersistenceManager.swift */; };
 		EBAAF0482795FEC1002FBFF5 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAAF0472795FEC1002FBFF5 /* Array+Extensions.swift */; };
 		EBB18C6F276BB6FE00483345 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBB18C6E276BB6FE00483345 /* AppDelegate.swift */; };
@@ -56,6 +57,7 @@
 		EB5C4BFE277AE8CE0060255D /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		EB5C4C00278567C50060255D /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		EB7F2027276E8ECC00315C49 /* TodosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosViewController.swift; sourceTree = "<group>"; };
+		EB9B4C4527F0D6940037AEC0 /* CircleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
 		EBAAF0452795F192002FBFF5 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		EBAAF0472795FEC1002FBFF5 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		EBB18C6B276BB6FE00483345 /* ToDos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDos.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +117,7 @@
 				EBB18C70276BB6FE00483345 /* SceneDelegate.swift */,
 				EB5C4BF9277ADB140060255D /* Todo.swift */,
 				D8B9617827DBF8330053C729 /* Person.swift */,
+				EB9B4C4527F0D6940037AEC0 /* CircleImageView.swift */,
 				EB5C4BFD277AE8B60060255D /* Extensions */,
 				EB7F2027276E8ECC00315C49 /* TodosViewController.swift */,
 				13D23F27276EB59100869EBC /* TodoEntryViewController.swift */,
@@ -212,6 +215,7 @@
 				D8DE3C6E27DA9007001C6870 /* OwnersTableViewCell.swift in Sources */,
 				D821A6CF27E274390020BD9E /* UIButton+Extensions.swift in Sources */,
 				EB202A2D2793570700DB1945 /* String+Extensions.swift in Sources */,
+				EB9B4C4627F0D6940037AEC0 /* CircleImageView.swift in Sources */,
 				1307E6DB27701026000AA6FD /* TodoTableViewCell.swift in Sources */,
 				EB5C4BFA277ADB140060255D /* Todo.swift in Sources */,
 				EB5C4BFC277ADDA90060255D /* Date+Extensions.swift in Sources */,
