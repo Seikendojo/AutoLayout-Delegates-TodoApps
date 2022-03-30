@@ -14,14 +14,22 @@ protocol AddInputDelegate {
 
 class TodoEntryViewController: UIViewController, UIPopoverPresentationControllerDelegate {
    
-    @IBOutlet var personPhotoButton: UIButton!
+    private struct Constants {
+        static let keyboardOffset = CGPoint(x: 0, y: 40)
+    }
     
-   // var imageName = ""
-    
+    private var tapGestureRecognizer = UITapGestureRecognizer()
     var delegate: AddInputDelegate?
     let context = (UIApplication.shared.delegate as!AppDelegate).persistentContainer.viewContext
     var todoToEdit: Todo?
 
+    @IBOutlet weak var priorityView: UIView!
+    @IBOutlet weak var DueDateView: UIView!
+    @IBOutlet weak var whatTodoView: UIView!
+    @IBOutlet weak var photoView: UIView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var addPhotoButton: UIButton!
+    @IBOutlet weak var ownerImageView: UIImageView!
     @IBOutlet var whatToDoTextFeild: UITextField!
     @IBOutlet var dateTextFeild: UITextField!
     @IBOutlet var priorityControl: UISegmentedControl!
@@ -30,28 +38,31 @@ class TodoEntryViewController: UIViewController, UIPopoverPresentationController
     private var datePicker = UIDatePicker()
 
     override func viewDidLoad() {
-       // personPhotoButton.imageView?.image = UIImage(named: imageName)
         super.viewDidLoad()
-        configPersonButton()
+        whatToDoTextFeild.delegate = self
+        dateTextFeild.delegate = self
         configDateTextField()
         stylePriorityControl()
         configTapGesture()
+        setupKeyboardHiding()
         configTodoEdit()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        whatToDoTextFeild.becomeFirstResponder()
-        personPhotoButton.imageView?.contentMode = UIView.ContentMode.scaleToFill
+        ownerImageView.contentMode = .scaleAspectFill
     }
 
     private func configTapGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        view.addGestureRecognizer(tapGesture)
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        tapGestureRecognizer.isEnabled = false
+        view.addGestureRecognizer(tapGestureRecognizer)
     }
 
     @objc func handleTap() {
         view.endEditing(true)
+        tapGestureRecognizer.isEnabled = false
+        keyboardWillHide()
     }
 
     private func stylePriorityControl() {
@@ -79,14 +90,6 @@ class TodoEntryViewController: UIViewController, UIPopoverPresentationController
             dateTextFeild.resignFirstResponder()
             datePicker = datePickerView
         }
-    }
-    
-    func configPersonButton(){
-        personPhotoButton.layer.cornerRadius = personPhotoButton.frame.width / 2
-        personPhotoButton.layer.borderWidth = 2
-        personPhotoButton.layer.masksToBounds = false
-        personPhotoButton.layer.borderColor = UIColor.darkGray.cgColor
-        personPhotoButton.clipsToBounds = true
     }
 
     @IBAction func configureSegment(_ sender: UISegmentedControl) {
@@ -139,17 +142,36 @@ class TodoEntryViewController: UIViewController, UIPopoverPresentationController
     @IBAction func personPhotoBtnTapped(_ sender: UIButton) {
         performSegue(withIdentifier: "goToPopup", sender: nil)
     }
+
+    private func setupKeyboardHiding() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc private func keyboardWillShow() {
+        scrollView.setContentOffset(Constants.keyboardOffset, animated: true)
+    }
+
+    @objc private func keyboardWillHide() {
+        scrollView.setContentOffset(.zero, animated: true)
+    }
 }
 
 extension TodoEntryViewController: ownerPhotoSelectionDelegate {
     func didTapChoice(image: UIImage) {
-        personPhotoButton.setImage(image, for: .normal)
-        personPhotoButton.setTitle("", for: .normal)
+        ownerImageView.image = image
+        addPhotoButton.setTitle("", for: .normal)
     }
 }
 
 extension TodoEntryViewController: UIAdaptivePresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
+    }
+}
+
+extension TodoEntryViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        tapGestureRecognizer.isEnabled = true
     }
 }
