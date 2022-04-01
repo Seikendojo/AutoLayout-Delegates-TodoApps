@@ -8,37 +8,27 @@
 import Foundation
 import UIKit
 
-class OwnerEntryFormViewController: UIViewController {
-    
+class OwnerEntryFormViewController: UITableViewController {
+
     @IBOutlet var firstNameTxtField: UITextField!
     @IBOutlet var lastNameTxtField: UITextField!
-    
+    @IBOutlet weak var ownerImageButton: UIButton!
+    @IBOutlet weak var ownerImageView: UIImageView!
+
     let picker = UIImagePickerController()
-    let ownerImageButton = UIButton(frame: CGRect(x: 87, y: 165, width: 240, height: 240))
+    private var tapGestureRecognizer = UITapGestureRecognizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.allowsEditing = true
         picker.delegate = self
-        configOwnerPhotoButton()
+        firstNameTxtField.delegate = self
+        lastNameTxtField.delegate = self
+        tableView.allowsSelection = false
+        addTapGestureRecognizer()
     }
-    
+
     //MARK: Helpers
-    
-    private func configOwnerPhotoButton() {
-        ownerImageButton.setTitle("Add Photo", for: .normal)
-        ownerImageButton.setTitleColor(.systemBlue, for: .normal)
-        ownerImageButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        self.view.addSubview(ownerImageButton)
-        ownerImageButton.makeRoundedButton()
-        ownerImageButton.imageView?.contentMode = UIView.ContentMode.scaleAspectFit
-    }
-    
-    @objc
-        func buttonAction() {
-            configActionSheet()
-        }
-    
     func configActionSheet() {
         let actionSheet = UIAlertController(title: "Photo", message: "Choose a source", preferredStyle: .actionSheet)
        
@@ -60,15 +50,26 @@ class OwnerEntryFormViewController: UIViewController {
         print("Save tapped")
     }
     
-    
+    @IBAction func ownerPhotoButtonTapped(_ sender: UIButton) {
+        configActionSheet()
+    }
+
+    private func addTapGestureRecognizer() {
+        tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(gestureRecognizerTapped))
+        tapGestureRecognizer.isEnabled = false
+        view.addGestureRecognizer(tapGestureRecognizer)
+    }
+
+    @objc private func gestureRecognizerTapped() {
+        view.endEditing(true)
+        tapGestureRecognizer.isEnabled = false
+    }
 }
 
 extension OwnerEntryFormViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            
-            ownerImageButton.makeRoundedButton()
-            ownerImageButton.setImage(image, for: .normal)
+            ownerImageView.image = image
             ownerImageButton.setTitle("", for: .normal)
             picker.dismiss(animated: true, completion: nil)
         }
@@ -77,5 +78,20 @@ extension OwnerEntryFormViewController: UINavigationControllerDelegate, UIImageP
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
-    
+}
+
+extension OwnerEntryFormViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        tapGestureRecognizer.isEnabled = true
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case firstNameTxtField:
+            lastNameTxtField.becomeFirstResponder()
+        default:
+            textField.resignFirstResponder()
+        }
+        return true
+    }
 }

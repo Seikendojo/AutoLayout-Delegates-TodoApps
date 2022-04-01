@@ -12,16 +12,15 @@ protocol AddInputDelegate {
     func edit(todo: Todo)
 }
 
-class TodoEntryViewController: UIViewController, UIPopoverPresentationControllerDelegate {
+class TodoEntryViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
    
-    @IBOutlet var personPhotoButton: UIButton!
-    
-   // var imageName = ""
-    
+    private var tapGestureRecognizer = UITapGestureRecognizer()
     var delegate: AddInputDelegate?
     let context = (UIApplication.shared.delegate as!AppDelegate).persistentContainer.viewContext
     var todoToEdit: Todo?
 
+    @IBOutlet weak var addPhotoButton: UIButton!
+    @IBOutlet weak var ownerImageView: UIImageView!
     @IBOutlet var whatToDoTextFeild: UITextField!
     @IBOutlet var dateTextFeild: UITextField!
     @IBOutlet var priorityControl: UISegmentedControl!
@@ -30,9 +29,10 @@ class TodoEntryViewController: UIViewController, UIPopoverPresentationController
     private var datePicker = UIDatePicker()
 
     override func viewDidLoad() {
-       // personPhotoButton.imageView?.image = UIImage(named: imageName)
         super.viewDidLoad()
-        configPersonButton()
+        whatToDoTextFeild.delegate = self
+        dateTextFeild.delegate = self
+        tableView.allowsSelection = false
         configDateTextField()
         stylePriorityControl()
         configTapGesture()
@@ -41,17 +41,18 @@ class TodoEntryViewController: UIViewController, UIPopoverPresentationController
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        whatToDoTextFeild.becomeFirstResponder()
-        personPhotoButton.imageView?.contentMode = UIView.ContentMode.scaleToFill
+        ownerImageView.contentMode = .scaleAspectFill
     }
 
     private func configTapGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        view.addGestureRecognizer(tapGesture)
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        tapGestureRecognizer.isEnabled = false
+        view.addGestureRecognizer(tapGestureRecognizer)
     }
 
     @objc func handleTap() {
         view.endEditing(true)
+        tapGestureRecognizer.isEnabled = false
     }
 
     private func stylePriorityControl() {
@@ -80,22 +81,7 @@ class TodoEntryViewController: UIViewController, UIPopoverPresentationController
             datePicker = datePickerView
         }
     }
-    
-    func configPersonButton(){
-        personPhotoButton.layer.cornerRadius = personPhotoButton.frame.width / 2
-        personPhotoButton.layer.borderWidth = 2
-        personPhotoButton.layer.masksToBounds = false
-        personPhotoButton.layer.borderColor = UIColor.darkGray.cgColor
-        personPhotoButton.clipsToBounds = true
-    }
 
-    @IBAction func configureSegment(_ sender: UISegmentedControl) {
-        let selectedIndex = priorityControl.isSelected
-        if !selectedIndex {
-            priorityControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: UIControl.State.selected)
-        }
-    }
-    
     func configTodoEdit() {
         if let todo = todoToEdit {
             title = "Edit Item"
@@ -133,7 +119,6 @@ class TodoEntryViewController: UIViewController, UIPopoverPresentationController
     
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
-        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func personPhotoBtnTapped(_ sender: UIButton) {
@@ -143,13 +128,29 @@ class TodoEntryViewController: UIViewController, UIPopoverPresentationController
 
 extension TodoEntryViewController: ownerPhotoSelectionDelegate {
     func didTapChoice(image: UIImage) {
-        personPhotoButton.setImage(image, for: .normal)
-        personPhotoButton.setTitle("", for: .normal)
+        ownerImageView.image = image
+        addPhotoButton.setTitle("", for: .normal)
     }
 }
 
 extension TodoEntryViewController: UIAdaptivePresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .none
+    }
+}
+
+extension TodoEntryViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        tapGestureRecognizer.isEnabled = true
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case whatToDoTextFeild:
+            dateTextFeild.becomeFirstResponder()
+        default:
+            textField.resignFirstResponder()
+        }
+        return true
     }
 }

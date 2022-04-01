@@ -15,7 +15,7 @@ class OwnerPopupViewController: UIViewController {
 
     var photoSelectionDelegate: ownerPhotoSelectionDelegate!
     
-    var ownerPhotosData = ["Bruce","SteveMcQueen","HalleBerry","Arnold","BradPitt","RobertDeNiro","Bruce","SteveMcQueen","HalleBerry","Arnold","BradPitt","RobertDeNiro","Bruce","SteveMcQueen","HalleBerry","Arnold","BradPitt","RobertDeNiro","Bruce","SteveMcQueen","HalleBerry","Arnold","BradPitt","RobertDeNiro", "addNewOwner"]
+    var ownerPhotosData = ["Bruce","SteveMcQueen","HalleBerry","Arnold","BradPitt","RobertDeNiro","HalleBerry","Arnold","BradPitt","RobertDeNiro","addNewOwner"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
