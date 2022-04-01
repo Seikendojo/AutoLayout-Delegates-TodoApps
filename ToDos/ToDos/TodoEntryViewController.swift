@@ -12,22 +12,13 @@ protocol AddInputDelegate {
     func edit(todo: Todo)
 }
 
-class TodoEntryViewController: UIViewController, UIPopoverPresentationControllerDelegate {
+class TodoEntryViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
    
-    private struct Constants {
-        static let keyboardOffset = CGPoint(x: 0, y: 40)
-    }
-    
     private var tapGestureRecognizer = UITapGestureRecognizer()
     var delegate: AddInputDelegate?
     let context = (UIApplication.shared.delegate as!AppDelegate).persistentContainer.viewContext
     var todoToEdit: Todo?
 
-    @IBOutlet weak var priorityView: UIView!
-    @IBOutlet weak var DueDateView: UIView!
-    @IBOutlet weak var whatTodoView: UIView!
-    @IBOutlet weak var photoView: UIView!
-    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var addPhotoButton: UIButton!
     @IBOutlet weak var ownerImageView: UIImageView!
     @IBOutlet var whatToDoTextFeild: UITextField!
@@ -44,7 +35,6 @@ class TodoEntryViewController: UIViewController, UIPopoverPresentationController
         configDateTextField()
         stylePriorityControl()
         configTapGesture()
-        setupKeyboardHiding()
         configTodoEdit()
     }
 
@@ -62,7 +52,6 @@ class TodoEntryViewController: UIViewController, UIPopoverPresentationController
     @objc func handleTap() {
         view.endEditing(true)
         tapGestureRecognizer.isEnabled = false
-        keyboardWillHide()
     }
 
     private func stylePriorityControl() {
@@ -92,13 +81,6 @@ class TodoEntryViewController: UIViewController, UIPopoverPresentationController
         }
     }
 
-    @IBAction func configureSegment(_ sender: UISegmentedControl) {
-        let selectedIndex = priorityControl.isSelected
-        if !selectedIndex {
-            priorityControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: UIControl.State.selected)
-        }
-    }
-    
     func configTodoEdit() {
         if let todo = todoToEdit {
             title = "Edit Item"
@@ -136,24 +118,10 @@ class TodoEntryViewController: UIViewController, UIPopoverPresentationController
     
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
-        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func personPhotoBtnTapped(_ sender: UIButton) {
         performSegue(withIdentifier: "goToPopup", sender: nil)
-    }
-
-    private func setupKeyboardHiding() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-
-    @objc private func keyboardWillShow() {
-        scrollView.setContentOffset(Constants.keyboardOffset, animated: true)
-    }
-
-    @objc private func keyboardWillHide() {
-        scrollView.setContentOffset(.zero, animated: true)
     }
 }
 

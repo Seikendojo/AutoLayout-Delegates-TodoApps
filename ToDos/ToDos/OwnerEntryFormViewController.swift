@@ -8,18 +8,12 @@
 import Foundation
 import UIKit
 
-class OwnerEntryFormViewController: UIViewController {
-    private struct Constants {
-        static let keyboardOffset = CGPoint(x: 0, y: 40)
-    }
+class OwnerEntryFormViewController: UITableViewController {
 
     @IBOutlet var firstNameTxtField: UITextField!
     @IBOutlet var lastNameTxtField: UITextField!
     @IBOutlet weak var ownerImageButton: UIButton!
     @IBOutlet weak var ownerImageView: UIImageView!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var firstNameView: UIView!
-    @IBOutlet weak var lastNameView: UIView!
 
     let picker = UIImagePickerController()
     private var tapGestureRecognizer = UITapGestureRecognizer()
@@ -31,15 +25,9 @@ class OwnerEntryFormViewController: UIViewController {
         firstNameTxtField.delegate = self
         lastNameTxtField.delegate = self
         addTapGestureRecognizer()
-        registerNotifications()
     }
 
     //MARK: Helpers
-    private func registerNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-
     func configActionSheet() {
         let actionSheet = UIAlertController(title: "Photo", message: "Choose a source", preferredStyle: .actionSheet)
        
@@ -74,15 +62,6 @@ class OwnerEntryFormViewController: UIViewController {
     @objc private func gestureRecognizerTapped() {
         view.endEditing(true)
         tapGestureRecognizer.isEnabled = false
-        keyboardWillHide()
-    }
-
-    @objc private func keyboardWillShow() {
-        scrollView.setContentOffset(Constants.keyboardOffset, animated: true)
-    }
-
-    @objc private func keyboardWillHide() {
-        scrollView.setContentOffset(.zero, animated: true)
     }
 }
 

@@ -69,7 +69,8 @@ extension TodosViewController {
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let todoSection = Section(rawValue: section)!
-        return todoSection.title
+        let sectionIsEmpty = myDataDict[todoSection.title]?.isEmpty ?? false
+        return sectionIsEmpty ? .none : todoSection.title
     }
 
     //Trailing action to delete todo
