@@ -32,6 +32,7 @@ class TodoEntryViewController: UITableViewController, UIPopoverPresentationContr
         super.viewDidLoad()
         whatToDoTextFeild.delegate = self
         dateTextFeild.delegate = self
+        tableView.allowsSelection = false
         configDateTextField()
         stylePriorityControl()
         configTapGesture()
@@ -141,5 +142,15 @@ extension TodoEntryViewController: UIAdaptivePresentationControllerDelegate {
 extension TodoEntryViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         tapGestureRecognizer.isEnabled = true
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case whatToDoTextFeild:
+            dateTextFeild.becomeFirstResponder()
+        default:
+            textField.resignFirstResponder()
+        }
+        return true
     }
 }

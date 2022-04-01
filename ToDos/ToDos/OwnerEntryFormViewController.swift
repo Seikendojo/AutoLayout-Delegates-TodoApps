@@ -24,6 +24,7 @@ class OwnerEntryFormViewController: UITableViewController {
         picker.delegate = self
         firstNameTxtField.delegate = self
         lastNameTxtField.delegate = self
+        tableView.allowsSelection = false
         addTapGestureRecognizer()
     }
 
@@ -82,5 +83,15 @@ extension OwnerEntryFormViewController: UINavigationControllerDelegate, UIImageP
 extension OwnerEntryFormViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         tapGestureRecognizer.isEnabled = true
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case firstNameTxtField:
+            lastNameTxtField.becomeFirstResponder()
+        default:
+            textField.resignFirstResponder()
+        }
+        return true
     }
 }
