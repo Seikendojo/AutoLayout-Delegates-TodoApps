@@ -1,17 +1,14 @@
 //
-//  TodoModel+CoreDataProperties.swift
+//  TodoModel+CoreData.swift
 //  ToDos
 //
-//  Created by Sia on 2022-01-29.
-//
+//  Created by Shahin on 2022-04-16.
 //
 
 import Foundation
 import CoreData
 
-
-extension TodoModel {
-
+public class TodoModel: NSManagedObject, Identifiable {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<TodoModel> {
         return NSFetchRequest<TodoModel>(entityName: "TodoModel")
     }
@@ -21,9 +18,9 @@ extension TodoModel {
     @NSManaged public var id: String
     @NSManaged public var priorityEnum: Int16
     @NSManaged public var isCompleted: Bool
-
-}
-
-extension TodoModel : Identifiable {
-
+    @NSManaged public var owner: PersonModel
+    var priority: Priority {
+        get{ return (Priority.init(rawValue: Int(priorityEnum)) ?? .none)! }
+        set{ priorityEnum = Int16(newValue.rawValue)  }
+    }
 }

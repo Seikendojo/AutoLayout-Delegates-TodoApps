@@ -8,6 +8,10 @@
 import Foundation
 import UIKit
 
+protocol PersonInputDelegate {
+    func add(person: Person)
+}
+
 class OwnerEntryFormViewController: UITableViewController {
 
     @IBOutlet var firstNameTxtField: UITextField!
@@ -17,7 +21,8 @@ class OwnerEntryFormViewController: UITableViewController {
 
     let picker = UIImagePickerController()
     private var tapGestureRecognizer = UITapGestureRecognizer()
-    
+    var delegate: PersonInputDelegate?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.allowsEditing = true
@@ -47,7 +52,14 @@ class OwnerEntryFormViewController: UITableViewController {
     }
     
     @IBAction func saveBarButtonTapped() {
-        print("Save tapped")
+        guard let firstName = firstNameTxtField.text,
+              let lastName = lastNameTxtField.text else { return }
+        let newPerson = Person(firstName: firstName,
+                               lastName: lastName,
+                               image: ownerImageView.image,
+                               todos: nil)
+        delegate?.add(person: newPerson)
+        dismiss(animated: true)
     }
     
     @IBAction func ownerPhotoButtonTapped(_ sender: UIButton) {

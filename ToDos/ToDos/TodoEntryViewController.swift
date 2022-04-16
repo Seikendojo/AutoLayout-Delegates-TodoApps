@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol AddInputDelegate {
+protocol TodoInputDelegate {
     func add(todo: Todo)
     func edit(todo: Todo)
 }
@@ -15,9 +15,10 @@ protocol AddInputDelegate {
 class TodoEntryViewController: UITableViewController, UIPopoverPresentationControllerDelegate {
    
     private var tapGestureRecognizer = UITapGestureRecognizer()
-    var delegate: AddInputDelegate?
-    let context = (UIApplication.shared.delegate as!AppDelegate).persistentContainer.viewContext
+    var delegate: TodoInputDelegate?
+    private let context = (UIApplication.shared.delegate as!AppDelegate).persistentContainer.viewContext
     var todoToEdit: Todo?
+    private var owner: Person?
 
     @IBOutlet weak var addPhotoButton: UIButton!
     @IBOutlet weak var ownerImageView: UIImageView!
@@ -97,12 +98,12 @@ class TodoEntryViewController: UITableViewController, UIPopoverPresentationContr
             todoToEdit.date = datePicker.date
             delegate?.edit(todo: todoToEdit)
             dismiss(animated: true)
-           
         } else {
-            guard let title = whatToDoTextFeild.text else { return }
+            guard let title = whatToDoTextFeild.text,
+            let owner = owner else { return }
             let date = datePicker.date
             let priority = Priority(rawValue: priorityControl.selectedSegmentIndex) ?? .low
-            delegate?.add(todo: .init(title: title, date: date, priority: priority))
+            delegate?.add(todo: .init(title: title, date: date, priority: priority, owner: owner))
             dismiss(animated: true)
         }
     }
@@ -115,21 +116,25 @@ class TodoEntryViewController: UITableViewController, UIPopoverPresentationContr
             destinationVC?.popoverPresentationController?.delegate = self
         }
     }
-    
-    
+
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
     }
-    
+
     @IBAction func personPhotoBtnTapped(_ sender: UIButton) {
         performSegue(withIdentifier: "goToPopup", sender: nil)
     }
 }
 
-extension TodoEntryViewController: ownerPhotoSelectionDelegate {
-    func didTapChoice(image: UIImage) {
-        ownerImageView.image = image
+extension TodoEntryViewController: OwnerSelectionDelegate {
+    func didSelect(_ owner: Person) {
+        ownerImageView.image = owner.image
         addPhotoButton.setTitle("", for: .normal)
+        self.owner = owner
+    }
+
+    func showOwnerInputScreen() {
+        // TODO: fix this later
     }
 }
 

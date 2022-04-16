@@ -14,10 +14,10 @@ class TodoTableViewCell: UITableViewCell {
     @IBOutlet var personImageView: UIImageView!
     
     override func prepareForReuse() {
-        updateCell(with: .none)
+        update(with: .none)
     }
 
-    func updateCell(with todo: Todo?) {
+    func update(with todo: Todo?) {
         if let todo = todo {
             personImageView.makeRounded()
             if todo.isCompleted {

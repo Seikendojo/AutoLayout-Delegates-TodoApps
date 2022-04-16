@@ -13,7 +13,7 @@ class TodosViewController: UITableViewController {
         persistenceManager.todos.sortedByDate
     }
 
-    private var myDataDict: [String: [Todo]] {
+    private var todosDict: [String: [Todo]] {
         persistenceManager.todosDict
     }
 
@@ -43,7 +43,7 @@ class TodosViewController: UITableViewController {
             todoEntryVC?.delegate = self
             guard let indexPath = sender as? IndexPath else { return }
             let section = Section(rawValue: indexPath.section)!
-            todoEntryVC?.todoToEdit = myDataDict[section.title]?[indexPath.row]
+            todoEntryVC?.todoToEdit = todosDict[section.title]?[indexPath.row]
         }
     }
 }
@@ -51,25 +51,25 @@ class TodosViewController: UITableViewController {
 // MARK: - DataSource
 extension TodosViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        myDataDict.keys.count
+        todosDict.keys.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let todoSection = Section(rawValue: section)!
-        return myDataDict[todoSection.title]?.count ?? 0
+        return todosDict[todoSection.title]?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let todoSection = Section(rawValue: indexPath.section)!
         let cell = tableView.dequeueReusableCell(withIdentifier: "todoCell", for: indexPath) as! TodoTableViewCell
-        let todo = myDataDict[todoSection.title]?[indexPath.row]
-        cell.updateCell(with: todo)
+        let todo = todosDict[todoSection.title]?[indexPath.row]
+        cell.update(with: todo)
         return cell
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let todoSection = Section(rawValue: section)!
-        let sectionIsEmpty = myDataDict[todoSection.title]?.isEmpty ?? false
+        let sectionIsEmpty = todosDict[todoSection.title]?.isEmpty ?? false
         return sectionIsEmpty ? .none : todoSection.title
     }
 
@@ -81,7 +81,7 @@ extension TodosViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let todoSection = Section(rawValue: indexPath.section),
-            let todoToDelete = myDataDict[todoSection.title]?[indexPath.row] else { return }
+            let todoToDelete = todosDict[todoSection.title]?[indexPath.row] else { return }
             persistenceManager.delete(todoToDelete)
             tableView.deleteRows(at: [indexPath], with: .fade)
             reloadData()
@@ -91,14 +91,14 @@ extension TodosViewController {
     //Leading action to strikethrough the todo text
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let todoSection = Section(rawValue: indexPath.section)!
-        guard var todoToUpdate = myDataDict[todoSection.title]?[indexPath.row] else { return .none }
+        guard var todoToUpdate = todosDict[todoSection.title]?[indexPath.row] else { return .none }
         let title = todoToUpdate.isCompleted ? "Undo" : "Done"
         let backgroundColor = todoToUpdate.isCompleted ? UIColor.todoYellow : UIColor.todoGreen
 
         let doneAction = UIContextualAction(style: .normal, title: title) { [weak self] (action, sourceView, completionHandler) in
             todoToUpdate.isCompleted.toggle()
             let cell = tableView.cellForRow(at: indexPath) as! TodoTableViewCell
-            cell.updateCell(with: todoToUpdate)
+            cell.update(with: todoToUpdate)
             self?.persistenceManager.save(todo: todoToUpdate)
             completionHandler(true)
         }
@@ -123,7 +123,7 @@ extension TodosViewController {
 }
 
 //MARK: Compfort Delegate
-extension TodosViewController: AddInputDelegate {
+extension TodosViewController: TodoInputDelegate {
     
     func edit(todo: Todo) {
         persistenceManager.save(todo: todo)

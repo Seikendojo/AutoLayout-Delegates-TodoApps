@@ -7,38 +7,43 @@
 
 import UIKit
 
-protocol ownerPhotoSelectionDelegate {
-    func didTapChoice(image: UIImage)
+protocol OwnerSelectionDelegate {
+    func didSelect(_ owner: Person)
+    func showOwnerInputScreen()
 }
 
 class OwnerPopupViewController: UIViewController {
 
-    var photoSelectionDelegate: ownerPhotoSelectionDelegate!
+    var photoSelectionDelegate: OwnerSelectionDelegate?
     
-    var ownerPhotosData = ["Bruce","SteveMcQueen","HalleBerry","Arnold","BradPitt","RobertDeNiro","HalleBerry","Arnold","BradPitt","RobertDeNiro","addNewOwner"]
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    var owners: [Person] {
+        PersistencManager.shared.people
     }
 }
 
 extension OwnerPopupViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        ownerPhotosData.count
+        owners.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ownerCell", for: indexPath) as! OwnerPhotoCollectionViewCell
-        cell.ownerImageView.image = UIImage(named: ownerPhotosData[indexPath.row])
-        cell.layer.cornerRadius = cell.frame.height/2
+        if indexPath.row == owners.count {
+            cell.showAddButton()
+        } else {
+            let owner = owners[indexPath.row]
+            cell.update(with: owner)
+        }
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let image = UIImage(named: ownerPhotosData[indexPath.row]) else { return }
-        print(image)
-        photoSelectionDelegate?.didTapChoice(image:image )
+        if indexPath.row == owners.count {
+            photoSelectionDelegate?.showOwnerInputScreen()
+        } else {
+            let owner = owners[indexPath.row]
+            photoSelectionDelegate?.didSelect(owner)
+        }
         dismiss(animated: true)
    }
 }

@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 class OwnersTableViewController: UITableViewController {
     private let persistenceManager = PersistencManager()
     
@@ -21,6 +20,24 @@ class OwnersTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         reloadData()
+    }
+    
+    @IBAction func addNewOwner(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "toPersonEntry", sender: nil)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toPersonEntry" {
+            let navController = segue.destination as? UINavigationController
+            let ownerEntryVC = navController?.viewControllers.first as? OwnerEntryFormViewController
+            ownerEntryVC?.delegate = self
+        }
+    }
+}
+
+extension OwnersTableViewController: PersonInputDelegate {
+    func add(person: Person) {
+        persistenceManager.save(person: person)
     }
 }
 
@@ -37,7 +54,7 @@ extension OwnersTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "peopleCell", for: indexPath) as! OwnersTableViewCell
         let person = people[indexPath.row]
-        cell.updateOwnerCell(with: person)
+        cell.update(with: person)
         return cell
     }
     

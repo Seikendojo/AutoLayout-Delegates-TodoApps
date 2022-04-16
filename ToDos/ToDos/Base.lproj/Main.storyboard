@@ -35,7 +35,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="QQ7-xb-eAl">
-                            <rect key="frame" x="0.0" y="317" width="414" height="579"/>
+                            <rect key="frame" x="0.0" y="202" width="414" height="579"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing to do!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dhi-qY-Ukx">
@@ -144,7 +144,7 @@
             <objects>
                 <viewController storyboardIdentifier="goToPopup" id="KjF-y9-Mwc" customClass="OwnerPopupViewController" customModule="ToDos" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="42s-Gd-RRo">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="350" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="l8T-kk-q5D">
@@ -216,7 +216,7 @@
             <objects>
                 <tableViewController id="chH-jT-vkT" customClass="TodoEntryViewController" customModule="ToDos" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="wqE-84-k1p">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <sections>
@@ -435,6 +435,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="ajS-tp-RTq"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="nCD-SK-ktA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -453,6 +454,7 @@
                     <tabBarItem key="tabBarItem" title="Todos" image="todos-selected" id="jBe-yc-V8O"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="l36-zF-HlP">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -472,7 +474,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="iPq-Zr-a2s">
-                            <rect key="frame" x="0.0" y="317" width="414" height="579"/>
+                            <rect key="frame" x="0.0" y="167" width="414" height="579"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No one to do anything!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Twp-BP-P4c">
@@ -538,7 +540,7 @@
                     <navigationItem key="navigationItem" title="People" id="K3O-6D-6Az">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="m2F-X1-uVh">
                             <connections>
-                                <segue destination="JEk-Va-5pC" kind="presentation" id="YDR-wq-TBG"/>
+                                <action selector="addNewOwner:" destination="RKe-ae-GCT" id="4fn-uP-ozL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -546,6 +548,7 @@
                     <connections>
                         <outlet property="noOneTodoLabel" destination="Twp-BP-P4c" id="cOj-3q-dfr"/>
                         <outlet property="tableView" destination="Rag-0P-Je9" id="qGi-vv-kB2"/>
+                        <segue destination="JEk-Va-5pC" kind="presentation" identifier="toPersonEntry" id="Fbh-gU-ryE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ncX-FB-8uh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -557,7 +560,7 @@
             <objects>
                 <tableViewController id="Rsc-Zd-jWQ" customClass="OwnerEntryFormViewController" customModule="ToDos" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="8fL-4f-9Rx">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <sections>
@@ -726,6 +729,7 @@
                     <tabBarItem key="tabBarItem" title="People" image="people-selected" id="09E-vj-fRh"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zTS-xH-1LH">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -742,7 +746,9 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JEk-Va-5pC" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="3zv-I9-m8e"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="33t-ol-IK8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

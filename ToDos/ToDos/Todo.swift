@@ -34,6 +34,7 @@ struct Todo {
     var title: String
     var date: Date
     var priority: Priority
+    var owner: Person
     var isCompleted = false
 
     func update(_ todoModel: inout TodoModel) -> TodoModel {
@@ -42,6 +43,7 @@ struct Todo {
         todoModel.priority = priority
         todoModel.id = id
         todoModel.isCompleted = isCompleted
+        todoModel.owner = owner.personModel
         return todoModel
     }
 
@@ -50,7 +52,18 @@ struct Todo {
              title: todoModel.title,
              date: todoModel.date,
              priority: todoModel.priority,
+             owner: Person.parse(from: todoModel.owner),
              isCompleted: todoModel.isCompleted)
+    }
+
+    var todoModel: TodoModel {
+        let model = TodoModel()
+        model.id = id
+        model.title = title
+        model.date = date
+        model.priority = priority
+        model.owner = owner.personModel
+        return model
     }
 }
 
