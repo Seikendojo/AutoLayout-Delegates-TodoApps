@@ -10,7 +10,7 @@ import UIKit
 
 
 class OwnersTableViewController: UITableViewController {
-    private let persistenceManager = PersistencManager()
+    private var persistenceManager = PersistencManager()
     
     private var people: [Person] {
         persistenceManager.people.sortedLastName
@@ -21,6 +21,21 @@ class OwnersTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         reloadData()
+    }
+    
+ 
+    
+    @IBAction func addOwnerBarButtonTapped(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "goToOwnerEntry", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if segue.identifier == "goToOwnerEntry" {
+            let navCOntroller = segue.destination as? UINavigationController
+            let ownerEntryVC = navCOntroller?.viewControllers.first as? OwnerEntryFormViewController
+            ownerEntryVC?.ownerDelegate = self
+        }
     }
 }
 
@@ -43,10 +58,18 @@ extension OwnersTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "goToOwnerTodoList", sender: self)
     }
     
     private func reloadData() {
         noOneTodoLabel.isHidden = !people.isEmpty
+        tableView.reloadData()
+    }
+}
+
+extension OwnersTableViewController: AddOwnerDelegate {
+    func add(person: Person) {
+        persistenceManager.people.append(person)
         tableView.reloadData()
     }
 }

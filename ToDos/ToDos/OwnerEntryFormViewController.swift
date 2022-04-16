@@ -8,8 +8,14 @@
 import Foundation
 import UIKit
 
+protocol AddOwnerDelegate {
+    func add(person: Person)
+}
+
 class OwnerEntryFormViewController: UITableViewController {
 
+    var ownerDelegate: AddOwnerDelegate!
+    
     @IBOutlet var firstNameTxtField: UITextField!
     @IBOutlet var lastNameTxtField: UITextField!
     @IBOutlet weak var ownerImageButton: UIButton!
@@ -47,7 +53,12 @@ class OwnerEntryFormViewController: UITableViewController {
     }
     
     @IBAction func saveBarButtonTapped() {
-        print("Save tapped")
+        guard let personFirstName = firstNameTxtField.text,
+              let personLastName = lastNameTxtField.text,
+              let personImage = ownerImageView.image else { return }
+        let person = Person(firstName: personFirstName, lastName: personLastName, image: personImage)
+        ownerDelegate.add(person: person)
+        dismiss(animated: true)
     }
     
     @IBAction func ownerPhotoButtonTapped(_ sender: UIButton) {
