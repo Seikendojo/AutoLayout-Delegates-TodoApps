@@ -14,6 +14,8 @@ protocol PersonInputDelegate {
 
 class OwnerEntryFormViewController: UITableViewController {
 
+    var ownerDelegate: PersonInputDelegate?
+    
     @IBOutlet var firstNameTxtField: UITextField!
     @IBOutlet var lastNameTxtField: UITextField!
     @IBOutlet weak var ownerImageButton: UIButton!

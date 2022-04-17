@@ -9,12 +9,12 @@ import Foundation
 import CoreData
 import UIKit
 
-struct PersistencManager {
-    static let shared = PersistencManager()
+struct PersistenceManager {
+    static let shared = PersistenceManager()
 
     private var todoModels: [TodoModel] {
         let request = TodoModel.fetchRequest()
-        let todoModels = try? persistenceContainer.viewContext.fetch(request)
+        let todoModels = try? persistentContainer.viewContext.fetch(request)
         return todoModels ?? [TodoModel]()
     }
 
@@ -26,7 +26,7 @@ struct PersistencManager {
 
     private var personModels: [PersonModel] {
         let request = PersonModel.fetchRequest()
-        let personModels = try? persistenceContainer.viewContext.fetch(request)
+        let personModels = try? persistentContainer.viewContext.fetch(request)
         return personModels ?? [PersonModel]()
     }
     
@@ -49,7 +49,7 @@ struct PersistencManager {
             request.predicate = NSPredicate(format: "id = %@", todo.id)
 
             do {
-                let context = persistenceContainer.viewContext
+                let context = persistentContainer.viewContext
                 let result = try context.fetch(request)
                 if result.count > 0 {
                     var todoModel = result.first!
@@ -59,13 +59,18 @@ struct PersistencManager {
                 print("Could not fetch. \(error) \(error.userInfo) ")
             }
         } else {
-            let todoModel = TodoModel(context: persistenceContainer.viewContext)
+            let personModel = PersonModel(context: persistentContainer.viewContext)
+            personModel.id = todo.owner.id
+            personModel.firstName = todo.owner.firstName
+            personModel.lastName = todo.owner.lastName
+
+            let todoModel = TodoModel(context: persistentContainer.viewContext)
             todoModel.id = todo.id
             todoModel.title = todo.title
             todoModel.date = todo.date
             todoModel.priority = todo.priority
             todoModel.isCompleted = todo.isCompleted
-            todoModel.owner = todo.owner.personModel
+            todoModel.owner = personModel
         }
         saveContext()
     }
@@ -75,7 +80,7 @@ struct PersistencManager {
         request.predicate = NSPredicate(format: "id = %@", todo.id)
 
         do {
-            let context = persistenceContainer.viewContext
+            let context = persistentContainer.viewContext
             let result = try context.fetch(request)
             if result.count > 0 {
                 let todo = result.first!
@@ -88,7 +93,7 @@ struct PersistencManager {
     }
 
     func save(person: Person) {
-        let personModel = PersonModel(context: persistenceContainer.viewContext)
+        let personModel = PersonModel(context: persistentContainer.viewContext)
         personModel.id = person.id
         personModel.firstName = person.firstName
         personModel.lastName = person.lastName
@@ -102,7 +107,7 @@ struct PersistencManager {
         request.predicate = NSPredicate(format: "id = %@", person.id)
 
         do {
-            let context = persistenceContainer.viewContext
+            let context = persistentContainer.viewContext
             let result = try context.fetch(request)
             if result.count > 0 {
                 let person = result.first!
@@ -116,7 +121,7 @@ struct PersistencManager {
 
     // MARK: - Core Data stack
 
-     var persistenceContainer: NSPersistentContainer = {
+     var persistentContainer: NSPersistentContainer = {
 
         let container = NSPersistentContainer(name: "TodoContainer")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -130,7 +135,7 @@ struct PersistencManager {
     // MARK: - Core Data Saving support
 
     private func saveContext () {
-        let context = persistenceContainer.viewContext
+        let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
                 try context.save()

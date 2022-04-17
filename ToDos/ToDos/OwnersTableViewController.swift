@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class OwnersTableViewController: UITableViewController {
-    private let persistenceManager = PersistencManager()
+    private var persistenceManager = PersistenceManager()
     
     private var people: [Person] {
         persistenceManager.people.sortedLastName
@@ -38,6 +38,7 @@ class OwnersTableViewController: UITableViewController {
 extension OwnersTableViewController: PersonInputDelegate {
     func add(person: Person) {
         persistenceManager.save(person: person)
+        reloadData()
     }
 }
 
@@ -60,6 +61,7 @@ extension OwnersTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "goToOwnerTodoList", sender: self)
     }
     
     private func reloadData() {

@@ -15,6 +15,8 @@
 		13D23F28276EB59100869EBC /* TodoEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D23F27276EB59100869EBC /* TodoEntryViewController.swift */; };
 		D821A6CD27E272D70020BD9E /* OwnerEntryFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821A6CC27E272D70020BD9E /* OwnerEntryFormViewController.swift */; };
 		D821A6CF27E274390020BD9E /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D821A6CE27E274390020BD9E /* UIButton+Extensions.swift */; };
+		D83582602804BCCB00C3A0B7 /* OwnersTodoListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D835825F2804BCCB00C3A0B7 /* OwnersTodoListTableViewController.swift */; };
+		D83582622804BD2600C3A0B7 /* OwnersTodoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83582612804BD2600C3A0B7 /* OwnersTodoListCell.swift */; };
 		D8B9617927DBF8330053C729 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B9617827DBF8330053C729 /* Person.swift */; };
 		D8DE3C6827DA8E34001C6870 /* OwnersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DE3C6727DA8E34001C6870 /* OwnersTableViewController.swift */; };
 		D8DE3C6E27DA9007001C6870 /* OwnersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DE3C6D27DA9007001C6870 /* OwnersTableViewCell.swift */; };
@@ -45,6 +47,8 @@
 		13D23F27276EB59100869EBC /* TodoEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEntryViewController.swift; sourceTree = "<group>"; };
 		D821A6CC27E272D70020BD9E /* OwnerEntryFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerEntryFormViewController.swift; sourceTree = "<group>"; };
 		D821A6CE27E274390020BD9E /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
+		D835825F2804BCCB00C3A0B7 /* OwnersTodoListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnersTodoListTableViewController.swift; sourceTree = "<group>"; };
+		D83582612804BD2600C3A0B7 /* OwnersTodoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnersTodoListCell.swift; sourceTree = "<group>"; };
 		D8B9617827DBF8330053C729 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		D8DE3C6727DA8E34001C6870 /* OwnersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnersTableViewController.swift; sourceTree = "<group>"; };
 		D8DE3C6927DA8FE4001C6870 /* ToDos-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ToDos-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -129,6 +133,8 @@
 				D8DE3C6727DA8E34001C6870 /* OwnersTableViewController.swift */,
 				D821A6CC27E272D70020BD9E /* OwnerEntryFormViewController.swift */,
 				D8DE3C6D27DA9007001C6870 /* OwnersTableViewCell.swift */,
+				D835825F2804BCCB00C3A0B7 /* OwnersTodoListTableViewController.swift */,
+				D83582612804BD2600C3A0B7 /* OwnersTodoListCell.swift */,
 				EBB18C74276BB6FE00483345 /* Main.storyboard */,
 				EBB18C77276BB6FF00483345 /* Assets.xcassets */,
 				EBB18C79276BB6FF00483345 /* LaunchScreen.storyboard */,
@@ -214,6 +220,7 @@
 			files = (
 				D8DE3C6E27DA9007001C6870 /* OwnersTableViewCell.swift in Sources */,
 				D821A6CF27E274390020BD9E /* UIButton+Extensions.swift in Sources */,
+				D83582602804BCCB00C3A0B7 /* OwnersTodoListTableViewController.swift in Sources */,
 				EB202A2D2793570700DB1945 /* String+Extensions.swift in Sources */,
 				EB9B4C4627F0D6940037AEC0 /* CircleImageView.swift in Sources */,
 				1307E6DB27701026000AA6FD /* TodoTableViewCell.swift in Sources */,
@@ -236,6 +243,7 @@
 				D821A6CD27E272D70020BD9E /* OwnerEntryFormViewController.swift in Sources */,
 				EBB18C71276BB6FE00483345 /* SceneDelegate.swift in Sources */,
 				13BC19C627D138EA0037E146 /* UIImage+Extensions.swift in Sources */,
+				D83582622804BD2600C3A0B7 /* OwnersTodoListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
