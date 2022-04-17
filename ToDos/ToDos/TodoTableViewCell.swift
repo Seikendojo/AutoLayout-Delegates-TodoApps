@@ -19,7 +19,7 @@ class TodoTableViewCell: UITableViewCell {
 
     func update(with todo: Todo?) {
         if let todo = todo {
-            personImageView.makeRounded()
+            personImageView.image = todo.owner.image
             if todo.isCompleted {
                 todoTextLabel.attributedText = todo.title.strikeThrough
                 timeLabel.attributedText = todo.date.shortDateString.strikeThrough
@@ -32,6 +32,7 @@ class TodoTableViewCell: UITableViewCell {
         } else {
             todoTextLabel.attributedText = .none
             timeLabel.attributedText = .none
+            personImageView.image = .none
         }
     }
 }

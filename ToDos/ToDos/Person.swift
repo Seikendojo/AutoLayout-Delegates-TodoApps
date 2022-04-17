@@ -19,7 +19,8 @@ struct Person {
     }
 
     static func parse(from personModel: PersonModel) -> Person {
-        Person(firstName: personModel.firstName,
+        Person(id: personModel.id,
+               firstName: personModel.firstName,
                lastName: personModel.lastName,
                image: UIImage(data: personModel.imageData),
                todos: personModel.todos)

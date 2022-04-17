@@ -59,18 +59,13 @@ struct PersistenceManager {
                 print("Could not fetch. \(error) \(error.userInfo) ")
             }
         } else {
-            let personModel = PersonModel(context: persistentContainer.viewContext)
-            personModel.id = todo.owner.id
-            personModel.firstName = todo.owner.firstName
-            personModel.lastName = todo.owner.lastName
-
             let todoModel = TodoModel(context: persistentContainer.viewContext)
             todoModel.id = todo.id
             todoModel.title = todo.title
             todoModel.date = todo.date
             todoModel.priority = todo.priority
             todoModel.isCompleted = todo.isCompleted
-            todoModel.owner = personModel
+            todoModel.owner = personModels.first(where: { $0.id == todo.owner.id })!
         }
         saveContext()
     }
