@@ -477,11 +477,10 @@
                             <rect key="frame" x="0.0" y="167" width="414" height="579"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No one to do anything!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Twp-BP-P4c">
-                                    <rect key="frame" x="175" y="412" width="64" height="67"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="67" id="JPj-sB-MO4"/>
-                                    </constraints>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Twp-BP-P4c">
+                                    <rect key="frame" x="160" y="269" width="94.5" height="41"/>
+                                    <string key="text">No one to
+do anything!</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -489,9 +488,8 @@
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstItem="Twp-BP-P4c" firstAttribute="leading" secondItem="iPq-Zr-a2s" secondAttribute="leading" constant="175" id="CjB-6O-Cgc"/>
+                                <constraint firstItem="Twp-BP-P4c" firstAttribute="centerY" secondItem="iPq-Zr-a2s" secondAttribute="centerY" id="8Q3-T2-dwQ"/>
                                 <constraint firstItem="Twp-BP-P4c" firstAttribute="centerX" secondItem="iPq-Zr-a2s" secondAttribute="centerX" id="Wff-CF-CTQ"/>
-                                <constraint firstItem="Twp-BP-P4c" firstAttribute="top" secondItem="iPq-Zr-a2s" secondAttribute="top" constant="412" id="lOt-DZ-wCY"/>
                             </constraints>
                         </view>
                         <prototypes>
@@ -728,8 +726,8 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WxJ-Dm-fIc" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="People" image="people-selected" id="09E-vj-fRh"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zTS-xH-1LH">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="zTS-xH-1LH">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
