@@ -43,7 +43,6 @@ struct Todo {
         todoModel.priority = priority
         todoModel.id = id
         todoModel.isCompleted = isCompleted
-        todoModel.owner = owner.personModel
         return todoModel
     }
 
@@ -54,16 +53,6 @@ struct Todo {
              priority: todoModel.priority,
              owner: Person.parse(from: todoModel.owner),
              isCompleted: todoModel.isCompleted)
-    }
-
-    var todoModel: TodoModel {
-        let model = TodoModel()
-        model.id = id
-        model.title = title
-        model.date = date
-        model.priority = priority
-        model.owner = owner.personModel
-        return model
     }
 }
 

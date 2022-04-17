@@ -16,7 +16,7 @@ class TodoEntryViewController: UITableViewController, UIPopoverPresentationContr
    
     private var tapGestureRecognizer = UITapGestureRecognizer()
     var delegate: TodoInputDelegate?
-    private let context = (UIApplication.shared.delegate as!AppDelegate).persistentContainer.viewContext
+    private let context = PersistenceManager.shared.persistentContainer.viewContext
     var todoToEdit: Todo?
     private var owner: Person?
 

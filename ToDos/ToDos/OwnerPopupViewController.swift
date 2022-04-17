@@ -17,7 +17,7 @@ class OwnerPopupViewController: UIViewController {
     var photoSelectionDelegate: OwnerSelectionDelegate?
     
     var owners: [Person] {
-        PersistencManager.shared.people
+        PersistenceManager.shared.people
     }
 }
 

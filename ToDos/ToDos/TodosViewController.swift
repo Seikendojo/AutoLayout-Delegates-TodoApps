@@ -8,7 +8,7 @@
 import UIKit
 
 class TodosViewController: UITableViewController {
-    private let persistenceManager = PersistencManager()
+    private let persistenceManager = PersistenceManager()
     private var myData: [Todo] {
         persistenceManager.todos.sortedByDate
     }

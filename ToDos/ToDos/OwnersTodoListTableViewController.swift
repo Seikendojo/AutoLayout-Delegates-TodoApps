@@ -10,7 +10,7 @@ import UIKit
 
 class OwnersTodoListTableViewController: UITableViewController {
     
-    private let persistanceManager = PersistencManager()
+    private let persistanceManager = PersistenceManager()
     
     private var myData: [Todo] {
         persistanceManager.todos.sortedByDate
@@ -167,7 +167,7 @@ class OwnersTodoListTableViewController: UITableViewController {
     }
 }
 
-extension OwnersTodoListTableViewController: AddInputDelegate {
+extension OwnersTodoListTableViewController: TodoInputDelegate {
     func add(todo: Todo) {
         persistanceManager.save(todo: todo)
         reloadData()

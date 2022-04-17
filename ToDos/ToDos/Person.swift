@@ -24,14 +24,4 @@ struct Person {
                image: UIImage(data: personModel.imageData),
                todos: personModel.todos)
     }
-
-    var personModel: PersonModel {
-        let model = PersonModel()
-        model.id = id
-        model.firstName = firstName
-        model.lastName = lastName
-        model.imageData = image?.pngData() ?? Data()
-        model.todos = todos
-        return model
-    }
 }
