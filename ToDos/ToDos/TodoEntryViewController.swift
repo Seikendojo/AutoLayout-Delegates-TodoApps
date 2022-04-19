@@ -18,7 +18,9 @@ class TodoEntryViewController: UITableViewController, UIPopoverPresentationContr
     var delegate: TodoInputDelegate?
     private let context = PersistenceManager.shared.persistentContainer.viewContext
     var todoToEdit: Todo?
-    private var owner: Person?
+    private var owner: Person? {
+        didSet { ownerImageView.image = owner?.image }
+    }
 
     @IBOutlet weak var addPhotoButton: UIButton!
     @IBOutlet weak var ownerImageView: UIImageView!
@@ -109,11 +111,20 @@ class TodoEntryViewController: UITableViewController, UIPopoverPresentationContr
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToPopup" {
+        switch segue.identifier {
+        case "goToPopup":
             let destinationVC = segue.destination as? OwnerPopupViewController
             destinationVC?.photoSelectionDelegate = self
             destinationVC?.popoverPresentationController?.backgroundColor = .lightGray
             destinationVC?.popoverPresentationController?.delegate = self
+
+        case "goToNewOwner":
+            let destinationVC = segue.destination as? OwnerEntryFormViewController
+            destinationVC?.delegate = self
+            destinationVC?.isPushed = true
+
+        default:
+            break
         }
     }
 
@@ -128,13 +139,18 @@ class TodoEntryViewController: UITableViewController, UIPopoverPresentationContr
 
 extension TodoEntryViewController: OwnerSelectionDelegate {
     func didSelect(_ owner: Person) {
-        ownerImageView.image = owner.image
         addPhotoButton.setTitle("", for: .normal)
         self.owner = owner
     }
 
     func showOwnerInputScreen() {
-        // TODO: fix this later
+        performSegue(withIdentifier: "toNewOwner", sender: nil)
+    }
+}
+
+extension TodoEntryViewController: PersonInputDelegate {
+    func add(new person: Person) {
+        owner = person
     }
 }
 

@@ -8,13 +8,15 @@
 import UIKit
 
 class TodosViewController: UITableViewController {
-    private let persistenceManager = PersistenceManager()
-    private var myData: [Todo] {
-        persistenceManager.todos.sortedByDate
+    enum Style {
+        case grouped
+        case individual(owner: Person)
     }
 
+    var style = Style.grouped
+    private let persistenceManager = PersistenceManager()
     private var todosDict: [String: [Todo]] {
-        persistenceManager.todosDict
+        persistenceManager.todosDict(for: style)
     }
 
     @IBOutlet var nothingTodoLabel: UILabel!
@@ -24,11 +26,13 @@ class TodosViewController: UITableViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.allowsSelection = false
+        addNotifications()
+        applyStyle()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        nothingTodoLabel.isHidden = !myData.isEmpty
+        nothingTodoLabel.isHidden = !persistenceManager.todos.isEmpty
     }
 
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
@@ -44,6 +48,34 @@ class TodosViewController: UITableViewController {
             guard let indexPath = sender as? IndexPath else { return }
             let section = Section(rawValue: indexPath.section)!
             todoEntryVC?.todoToEdit = todosDict[section.title]?[indexPath.row]
+        }
+    }
+
+    private func addNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: .NSManagedObjectContextDidSave, object: nil)
+    }
+
+    private func customizeNavigationBar(for owner: Person) {
+        let frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        let containerView = UIView(frame: frame)
+        let imageView = UIImageView(frame: frame)
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = imageView.bounds.width / 2
+        imageView.layer.borderWidth = 1
+        imageView.layer.masksToBounds = true
+        imageView.layer.borderColor = UIColor.darkGray.cgColor
+        imageView.layer.masksToBounds = true
+        imageView.image = owner.image
+        containerView.addSubview(imageView)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: containerView)
+    }
+
+    private func applyStyle() {
+        switch style {
+        case .grouped:
+            break
+        case .individual(let owner):
+            customizeNavigationBar(for: owner)
         }
     }
 }
@@ -63,6 +95,7 @@ extension TodosViewController {
         let todoSection = Section(rawValue: indexPath.section)!
         let cell = tableView.dequeueReusableCell(withIdentifier: "todoCell", for: indexPath) as! TodoTableViewCell
         let todo = todosDict[todoSection.title]?[indexPath.row]
+        cell.style = style
         cell.update(with: todo)
         return cell
     }
@@ -136,8 +169,9 @@ extension TodosViewController: TodoInputDelegate {
         reloadData()
     }
 
+    @objc
     private func reloadData() {
-        nothingTodoLabel.isHidden = !myData.isEmpty
+        nothingTodoLabel.isHidden = !persistenceManager.todos.isEmpty
         tableView.reloadData()
     }
 }

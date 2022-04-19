@@ -10,7 +10,7 @@ import UIKit
 
 class OwnersTableViewController: UITableViewController {
     private var persistenceManager = PersistenceManager()
-    
+    private var selectedIndexPath = IndexPath()
     private var people: [Person] {
         persistenceManager.people.sortedLastName
     }
@@ -32,11 +32,18 @@ class OwnersTableViewController: UITableViewController {
             let ownerEntryVC = navController?.viewControllers.first as? OwnerEntryFormViewController
             ownerEntryVC?.delegate = self
         }
+
+        if segue.identifier == "toTodosList" {
+            let destinationVC = segue.destination as? TodosViewController
+            destinationVC?.hidesBottomBarWhenPushed = true
+            let owner = people[selectedIndexPath.row]
+            destinationVC?.style = .individual(owner: owner)
+        }
     }
 }
 
 extension OwnersTableViewController: PersonInputDelegate {
-    func add(person: Person) {
+    func add(new person: Person) {
         persistenceManager.save(person: person)
         reloadData()
     }
@@ -61,7 +68,8 @@ extension OwnersTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: "goToOwnerTodoList", sender: self)
+        selectedIndexPath = indexPath
+        performSegue(withIdentifier: "toTodosList", sender: self)
     }
     
     private func reloadData() {

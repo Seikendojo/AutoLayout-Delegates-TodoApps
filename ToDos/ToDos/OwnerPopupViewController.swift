@@ -38,12 +38,12 @@ extension OwnerPopupViewController: UICollectionViewDataSource, UICollectionView
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        dismiss(animated: true)
         if indexPath.row == owners.count {
             photoSelectionDelegate?.showOwnerInputScreen()
         } else {
             let owner = owners[indexPath.row]
             photoSelectionDelegate?.didSelect(owner)
         }
-        dismiss(animated: true)
    }
 }

@@ -12,14 +12,23 @@ class TodoTableViewCell: UITableViewCell {
     @IBOutlet private var timeLabel: UILabel!
     @IBOutlet private var priorityLabel: UILabel!
     @IBOutlet var personImageView: UIImageView!
-    
+
+    var style = TodosViewController.Style.grouped
+
     override func prepareForReuse() {
         update(with: .none)
     }
 
     func update(with todo: Todo?) {
         if let todo = todo {
-            personImageView.image = todo.owner.image
+            switch style {
+            case .grouped:
+                personImageView.image = todo.owner.image
+                personImageView.isHidden = false
+            case .individual:
+                personImageView.isHidden = true
+            }
+
             if todo.isCompleted {
                 todoTextLabel.attributedText = todo.title.strikeThrough
                 timeLabel.attributedText = todo.date.shortDateString.strikeThrough

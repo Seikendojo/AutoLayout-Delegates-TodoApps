@@ -43,6 +43,22 @@ struct PersistenceManager {
         return dict
     }
 
+    func todosDict(for style: TodosViewController.Style) -> [String: [Todo]] {
+        var dict = [String: [Todo]]()
+        guard !todos.isEmpty else { return dict }
+        switch style {
+        case .grouped:
+            dict = todosDict
+
+        case .individual(let owner):
+            let todosArray = todos.filter({ $0.owner.id == owner.id })
+            dict[Section.todo.title] = todosArray.filter({ !$0.isCompleted }).sortedByDate
+            dict[Section.done.title] = todosArray.filter({ $0.isCompleted }).sortedByDate
+
+        }
+        return dict
+    }
+
     func save(todo: Todo) {
         if todos.contains(where: { $0.id == todo.id }) {
             let request = TodoModel.fetchRequest()
@@ -66,6 +82,7 @@ struct PersistenceManager {
             todoModel.priority = todo.priority
             todoModel.isCompleted = todo.isCompleted
             todoModel.owner = personModels.first(where: { $0.id == todo.owner.id })!
+            todoModel.owner.addToTodos(todoModel)
         }
         saveContext()
     }

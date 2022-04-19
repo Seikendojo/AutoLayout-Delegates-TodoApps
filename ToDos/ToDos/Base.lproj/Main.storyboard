@@ -35,7 +35,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="QQ7-xb-eAl">
-                            <rect key="frame" x="0.0" y="202" width="414" height="579"/>
+                            <rect key="frame" x="0.0" y="202" width="414" height="607"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nothing to do!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dhi-qY-Ukx">
@@ -292,6 +292,7 @@
                                                         <constraint firstItem="7YC-oZ-ZEU" firstAttribute="leading" secondItem="Pjx-JG-1cM" secondAttribute="leading" id="Oc0-MN-dqU"/>
                                                         <constraint firstAttribute="trailing" secondItem="7YC-oZ-ZEU" secondAttribute="trailing" id="PQh-Wq-ntE"/>
                                                         <constraint firstItem="7YC-oZ-ZEU" firstAttribute="top" secondItem="0Aw-Hw-g5W" secondAttribute="bottom" constant="10" id="SiZ-DC-UOb"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="0Aw-Hw-g5W" secondAttribute="trailing" constant="20" symbolic="YES" id="hAe-Vq-UOW"/>
                                                         <constraint firstAttribute="bottom" secondItem="7YC-oZ-ZEU" secondAttribute="bottom" id="quu-d3-xzO"/>
                                                     </constraints>
                                                 </view>
@@ -331,6 +332,7 @@
                                                         <constraint firstItem="MJD-4t-7Sb" firstAttribute="top" secondItem="s4y-GI-D0g" secondAttribute="top" id="JT8-lp-RRP"/>
                                                         <constraint firstItem="KS0-C5-uen" firstAttribute="leading" secondItem="s4y-GI-D0g" secondAttribute="leading" id="OWc-A5-0YQ"/>
                                                         <constraint firstItem="MJD-4t-7Sb" firstAttribute="leading" secondItem="s4y-GI-D0g" secondAttribute="leading" id="PlW-ey-rOX"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MJD-4t-7Sb" secondAttribute="trailing" constant="20" symbolic="YES" id="QK9-gu-8Lw"/>
                                                         <constraint firstAttribute="trailing" secondItem="KS0-C5-uen" secondAttribute="trailing" id="a6u-Fl-qj5"/>
                                                         <constraint firstAttribute="bottom" secondItem="KS0-C5-uen" secondAttribute="bottom" id="axg-Wt-wtX"/>
                                                         <constraint firstItem="KS0-C5-uen" firstAttribute="top" secondItem="MJD-4t-7Sb" secondAttribute="bottom" constant="10" id="xKH-lO-fsw"/>
@@ -380,6 +382,7 @@
                                                         <constraint firstAttribute="trailing" secondItem="dRX-nl-170" secondAttribute="trailing" id="YsW-PE-Qks"/>
                                                         <constraint firstItem="2bi-qZ-15H" firstAttribute="top" secondItem="OAb-zp-SjM" secondAttribute="top" id="hdz-St-Gvl"/>
                                                         <constraint firstAttribute="bottom" secondItem="dRX-nl-170" secondAttribute="bottom" id="iHt-Bt-ks6"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2bi-qZ-15H" secondAttribute="trailing" constant="20" symbolic="YES" id="iZl-OA-Rje"/>
                                                         <constraint firstItem="dRX-nl-170" firstAttribute="top" secondItem="2bi-qZ-15H" secondAttribute="bottom" constant="10" id="ijA-nh-5eg"/>
                                                     </constraints>
                                                 </view>
@@ -422,6 +425,7 @@
                         <segue destination="KjF-y9-Mwc" kind="popoverPresentation" identifier="goToPopup" popoverAnchorView="dCg-5a-dql" id="X8p-LD-g7j">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES"/>
                         </segue>
+                        <segue destination="Rsc-Zd-jWQ" kind="show" identifier="toNewOwner" id="B6Z-ie-gX0"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fNK-Xo-pgg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -474,11 +478,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="iPq-Zr-a2s">
-                            <rect key="frame" x="0.0" y="167" width="414" height="579"/>
+                            <rect key="frame" x="0.0" y="167" width="414" height="642"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Twp-BP-P4c">
-                                    <rect key="frame" x="160" y="269" width="94.5" height="41"/>
+                                    <rect key="frame" x="160" y="300.5" width="94.5" height="41"/>
                                     <string key="text">No one to
 do anything!</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -547,6 +551,7 @@ do anything!</string>
                         <outlet property="noOneTodoLabel" destination="Twp-BP-P4c" id="cOj-3q-dfr"/>
                         <outlet property="tableView" destination="Rag-0P-Je9" id="qGi-vv-kB2"/>
                         <segue destination="JEk-Va-5pC" kind="presentation" identifier="toPersonEntry" id="Fbh-gU-ryE"/>
+                        <segue destination="rld-mK-UB4" kind="show" identifier="toTodosList" id="PGr-jQ-fDC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ncX-FB-8uh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -759,6 +764,21 @@ do anything!</string>
             <point key="canvasLocation" x="8070" y="694"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="Far-Lc-WDz">
+            <size key="intrinsicContentSize" width="225" height="225"/>
+        </designable>
+        <designable name="e4H-ck-upA">
+            <size key="intrinsicContentSize" width="225" height="225"/>
+        </designable>
+        <designable name="l0e-DO-beU">
+            <size key="intrinsicContentSize" width="225" height="225"/>
+        </designable>
+    </designables>
+    <inferredMetricsTieBreakers>
+        <segue reference="B6Z-ie-gX0"/>
+        <segue reference="PGr-jQ-fDC"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="Bruce" width="225" height="225"/>
         <image name="people-selected" width="23" height="23"/>

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol PersonInputDelegate {
-    func add(person: Person)
+    func add(new person: Person)
 }
 
 class OwnerEntryFormViewController: UITableViewController {
@@ -24,6 +24,7 @@ class OwnerEntryFormViewController: UITableViewController {
     let picker = UIImagePickerController()
     private var tapGestureRecognizer = UITapGestureRecognizer()
     var delegate: PersonInputDelegate?
+    var isPushed = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,18 +51,26 @@ class OwnerEntryFormViewController: UITableViewController {
     }
     
     @IBAction func cancelBarButtonTapped() {
-        dismiss(animated: true)
+        closeScreen()
     }
     
     @IBAction func saveBarButtonTapped() {
         guard let firstName = firstNameTxtField.text,
               let lastName = lastNameTxtField.text else { return }
-        let newPerson = Person(firstName: firstName,
+        let person = Person(firstName: firstName,
                                lastName: lastName,
                                image: ownerImageView.image,
                                todos: nil)
-        delegate?.add(person: newPerson)
-        dismiss(animated: true)
+        delegate?.add(new: person)
+        closeScreen()
+    }
+
+    private func closeScreen() {
+        if isPushed {
+            navigationController?.popViewController(animated: true)
+        } else {
+            dismiss(animated: true)
+        }
     }
     
     @IBAction func ownerPhotoButtonTapped(_ sender: UIButton) {
