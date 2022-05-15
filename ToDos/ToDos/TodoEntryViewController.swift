@@ -144,7 +144,14 @@ extension TodoEntryViewController: OwnerSelectionDelegate {
     }
 
     func showOwnerInputScreen() {
-        performSegue(withIdentifier: "toNewOwner", sender: nil)
+        dismiss(animated: true) {
+            DispatchQueue.main.async {
+                let tabBarController = UIApplication.shared.currentWindow?.rootViewController as? UITabBarController
+                tabBarController?.selectedIndex = 1
+                let peopleVC = (tabBarController?.viewControllers?.last as? UINavigationController)?.viewControllers.first as? OwnersTableViewController
+                peopleVC?.performSegue(withIdentifier: "toPersonEntry", sender: nil)
+            }
+        }
     }
 }
 

@@ -20,6 +20,8 @@
 		D8DE3C6827DA8E34001C6870 /* OwnersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DE3C6727DA8E34001C6870 /* OwnersTableViewController.swift */; };
 		D8DE3C6E27DA9007001C6870 /* OwnersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8DE3C6D27DA9007001C6870 /* OwnersTableViewCell.swift */; };
 		EB202A2D2793570700DB1945 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB202A2C2793570700DB1945 /* String+Extensions.swift */; };
+		EB292B84283083DB005F2583 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB292B83283083DB005F2583 /* Data+Extensions.swift */; };
+		EB292B8628317574005F2583 /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB292B8528317574005F2583 /* UIApplication+Extensions.swift */; };
 		EB29EDB0280B86ED006D9E03 /* TodoModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29EDAC280B86ED006D9E03 /* TodoModel+CoreDataClass.swift */; };
 		EB29EDB1280B86ED006D9E03 /* TodoModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29EDAD280B86ED006D9E03 /* TodoModel+CoreDataProperties.swift */; };
 		EB29EDB2280B86ED006D9E03 /* PersonModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB29EDAE280B86ED006D9E03 /* PersonModel+CoreDataClass.swift */; };
@@ -55,6 +57,8 @@
 		D8DE3C6927DA8FE4001C6870 /* ToDos-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ToDos-Bridging-Header.h"; sourceTree = "<group>"; };
 		D8DE3C6D27DA9007001C6870 /* OwnersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnersTableViewCell.swift; sourceTree = "<group>"; };
 		EB202A2C2793570700DB1945 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		EB292B83283083DB005F2583 /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
+		EB292B8528317574005F2583 /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
 		EB29EDAC280B86ED006D9E03 /* TodoModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoModel+CoreDataClass.swift"; sourceTree = "<group>"; };
 		EB29EDAD280B86ED006D9E03 /* TodoModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		EB29EDAE280B86ED006D9E03 /* PersonModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonModel+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -106,11 +110,13 @@
 			children = (
 				D821A6CE27E274390020BD9E /* UIButton+Extensions.swift */,
 				EBAAF0472795FEC1002FBFF5 /* Array+Extensions.swift */,
+				EB292B83283083DB005F2583 /* Data+Extensions.swift */,
 				EB5C4BFB277ADDA90060255D /* Date+Extensions.swift */,
 				EB202A2C2793570700DB1945 /* String+Extensions.swift */,
 				EB5C4BFE277AE8CE0060255D /* UIColor+Extensions.swift */,
 				EB5C4C00278567C50060255D /* UITextField+Extensions.swift */,
 				13BC19C527D138EA0037E146 /* UIImage+Extensions.swift */,
+				EB292B8528317574005F2583 /* UIApplication+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -246,11 +252,13 @@
 				EB29EDB0280B86ED006D9E03 /* TodoModel+CoreDataClass.swift in Sources */,
 				EBB18C6F276BB6FE00483345 /* AppDelegate.swift in Sources */,
 				EB29EDB1280B86ED006D9E03 /* TodoModel+CoreDataProperties.swift in Sources */,
+				EB292B84283083DB005F2583 /* Data+Extensions.swift in Sources */,
 				13D23F28276EB59100869EBC /* TodoEntryViewController.swift in Sources */,
 				EBAAF0482795FEC1002FBFF5 /* Array+Extensions.swift in Sources */,
 				EB5C4C01278567C50060255D /* UITextField+Extensions.swift in Sources */,
 				EB7F2028276E8ECC00315C49 /* TodosViewController.swift in Sources */,
 				EBAAF0462795F192002FBFF5 /* PersistenceManager.swift in Sources */,
+				EB292B8628317574005F2583 /* UIApplication+Extensions.swift in Sources */,
 				D8DE3C6827DA8E34001C6870 /* OwnersTableViewController.swift in Sources */,
 				1302B8A627D28A38008E1055 /* OwnerPopupViewController.swift in Sources */,
 				1302B8A827D2A27B008E1055 /* OwnerPhotoCollectionViewCell.swift in Sources */,

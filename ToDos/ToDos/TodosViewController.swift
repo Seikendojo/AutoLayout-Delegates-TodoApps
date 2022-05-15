@@ -15,9 +15,7 @@ class TodosViewController: UITableViewController {
 
     var style = Style.grouped
     private let persistenceManager = PersistenceManager()
-    private var todosDict: [String: [Todo]] {
-        persistenceManager.todosDict(for: style)
-    }
+    private lazy var todosDict: [String: [Todo]] = persistenceManager.todosDict(for: style)
 
     @IBOutlet var nothingTodoLabel: UILabel!
 
@@ -114,9 +112,12 @@ extension TodosViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let todoSection = Section(rawValue: indexPath.section),
-            let todoToDelete = todosDict[todoSection.title]?[indexPath.row] else { return }
-            persistenceManager.delete(todoToDelete)
+                  let todoToDelete = todosDict[todoSection.title]?[indexPath.row] else { return }
+            todosDict[todoSection.title]?.remove(at: indexPath.row)
+            tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.endUpdates()
+            persistenceManager.delete(todoToDelete)
             reloadData()
         }
     }
@@ -171,6 +172,7 @@ extension TodosViewController: TodoInputDelegate {
 
     @objc
     private func reloadData() {
+        todosDict = persistenceManager.todosDict(for: style)
         nothingTodoLabel.isHidden = !persistenceManager.todos.isEmpty
         tableView.reloadData()
     }

@@ -22,7 +22,7 @@ struct Person {
         Person(id: personModel.id,
                firstName: personModel.firstName,
                lastName: personModel.lastName,
-               image: UIImage(data: personModel.imageData),
+               image: personModel.imageData.image,
                todos: personModel.todos)
     }
 }

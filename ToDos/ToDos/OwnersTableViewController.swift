@@ -11,9 +11,7 @@ import UIKit
 class OwnersTableViewController: UITableViewController {
     private var persistenceManager = PersistenceManager()
     private var selectedIndexPath = IndexPath()
-    private var people: [Person] {
-        persistenceManager.people.sortedLastName
-    }
+    private lazy var people: [Person] = persistenceManager.people.sortedLastName
 
     @IBOutlet weak var noOneTodoLabel: UILabel!
     
@@ -73,6 +71,7 @@ extension OwnersTableViewController {
     }
     
     private func reloadData() {
+        people = persistenceManager.people.sortedLastName
         noOneTodoLabel.isHidden = !people.isEmpty
         tableView.reloadData()
     }
